@@ -1,0 +1,7 @@
+title:         Title - ServerTime
+keywords:      server, time, key, words
+description:   description of the page
+bottom_text:    BottomText
+content_text:  ContentText in the end of the page
+view:          viewtext
+datasource:    /data/time

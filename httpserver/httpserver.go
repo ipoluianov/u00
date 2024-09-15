@@ -136,10 +136,20 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return r == '/'
 	})
 
+	logger.Println("URI:", r.RequestURI)
+
 	path := "index"
 
 	if len(parts) > 0 {
 		path = parts[0]
+	}
+
+	if path == "data" {
+		if len(parts) > 1 {
+			bs := c.s.Get(parts[1])
+			w.Write([]byte(bs))
+		}
+		return
 	}
 
 	if path == "main.css" {
@@ -154,7 +164,12 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	page, err := c.s.GetPage(path)
+	pagePath := ""
+	for p := range parts {
+		pagePath += parts[p] + "/"
+	}
+
+	page, err := c.s.GetPage(pagePath)
 	if err != nil {
 		w.WriteHeader(404)
 		w.Write([]byte("not found"))
@@ -166,8 +181,11 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	tmp = strings.ReplaceAll(tmp, "%PAGE_HEADER%", string(page.Title))
 	tmp = strings.ReplaceAll(tmp, "%DESCRIPTION%", string(page.Description))
 	tmp = strings.ReplaceAll(tmp, "%KEYWORDS%", string(page.KeyWords))
-	tmp = strings.ReplaceAll(tmp, "%CONTENT_HTML%", string(page.HTML))
-	tmp = strings.ReplaceAll(tmp, "%CONTENT_JS%", string(page.JS))
+
+	tmp = strings.ReplaceAll(tmp, "%VIEW_HTML%", string(page.ViewHtml))
+	tmp = strings.ReplaceAll(tmp, "%VIEW_SCRIPT%", string(page.ViewScript))
+	tmp = strings.ReplaceAll(tmp, "%PAGE_SCRIPT%", string(page.PageScript))
+
 	tmp = strings.ReplaceAll(tmp, "%CONTENT_TEXT%", string(page.ContentText))
 	tmp = strings.ReplaceAll(tmp, "%BOTTOM_TEXT%", string(page.BottomText))
 

@@ -3,13 +3,12 @@
 
 <head>
     <title>%TITLE%</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
     <meta name="description" content="%DESCRIPTION%">
     <meta name="keywords" content="%KEYWORDS%">
-    <meta name="author" content="%AUTHOR%">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <script src="main.js"></script>
+    <script src="/main.js"></script>
 </head>
 
 <body>
@@ -20,7 +19,7 @@
         </div>
 
         <div style="flex-grow: 1;display: flex;color: #4caf50;padding: 20px;">
-            %CONTENT_HTML%
+            %VIEW_HTML%
         </div>
         <div
             style="background-color: #222; height: 60px; display: flex; align-items: center; align-content: center; justify-content: center;">
@@ -28,13 +27,16 @@
         </div>
     </div>
 
+    %VIEW_SCRIPT%
+    
+    %PAGE_SCRIPT%
+
     <div class="contentTextContainer">
         <div class="contentText">
             %CONTENT_TEXT%
         </div>
     </div>
 
-    %CONTENT_JS%
 
     <script>
         function updateTick() {
