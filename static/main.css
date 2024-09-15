@@ -16,3 +16,13 @@ div.contentText {
     font-family: 'Courier New', Courier, monospace;
     color: #AAA;
 }
+
+a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #090;
+    text-decoration: underline;
+}

@@ -169,6 +169,10 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		pagePath += parts[p] + "/"
 	}
 
+	if len(pagePath) == 0 {
+		pagePath = "index"
+	}
+
 	page, err := c.s.GetPage(pagePath)
 	if err != nil {
 		w.WriteHeader(404)
