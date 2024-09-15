@@ -7,20 +7,27 @@ import (
 	"strings"
 
 	"github.com/ipoluianov/gomisc/logger"
+	"github.com/ipoluianov/u00/static"
+	"github.com/ipoluianov/u00/system"
 	"github.com/ipoluianov/u00/utils"
 )
 
 type HttpServer struct {
 	srv    *http.Server
 	srvTLS *http.Server
+
+	s *system.System
 }
 
 func NewHttpServer() *HttpServer {
 	var c HttpServer
+	c.s = system.NewSystem()
 	return &c
 }
 
 func (c *HttpServer) Start() {
+	c.s.Start()
+
 	go c.thListen()
 	go c.thListenTLS()
 }
@@ -129,18 +136,33 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return r == '/'
 	})
 
-	if len(parts) == 0 {
-		w.Write([]byte("index"))
+	path := "index"
+
+	if len(parts) > 0 {
+		path = parts[0]
+	}
+
+	if path == "main.css" {
+		w.Header().Set("Content-Type", "text/css")
+		w.Write(static.Main_css)
 		return
 	}
 
-	reqType := parts[0]
-
-	if reqType == "view-data" {
-		w.Write([]byte("DATA"))
+	if path == "main.js" {
+		w.Header().Set("Content-Type", "application/javascript")
+		w.Write(static.Main_js)
 		return
 	}
 
-	// STATIC HTML
-	w.Write([]byte("PAGE"))
+	res, err := c.s.GetPage(path)
+	if err != nil {
+		w.WriteHeader(404)
+		w.Write([]byte("not found"))
+		return
+	}
+
+	tmp := string(static.Main_html)
+	tmp = strings.ReplaceAll(tmp, "%CONTENT%", string(res))
+
+	w.Write([]byte(tmp))
 }

@@ -1,0 +1,18 @@
+body {
+    font-size: 14pt;
+    margin: 0px;
+    background-color: #333;
+}
+
+div.contentTextContainer {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+div.contentText {
+    max-width: 600px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #AAA;
+}
