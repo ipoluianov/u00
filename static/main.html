@@ -16,72 +16,44 @@
     <div style="height: 100vh;display: flex;flex-direction: column;" id="fullHeightElement">
         <div
             style="display: flex; align-items: center; justify-content: center; text-align: center;background-color: #222; height: 60px;">
-            <div style="color: #aaa;">%PAGE_TITLE%</div>
+            <div style="color: #aaa;">%PAGE_HEADER%</div>
         </div>
 
         <div style="flex-grow: 1;display: flex;color: #4caf50;padding: 20px;">
-            <div id="textParent"
-                style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; text-align: center;">
-                <span id="dataitem"></span>
-            </div>
+            %CONTENT_HTML%
         </div>
         <div
             style="background-color: #222; height: 60px; display: flex; align-items: center; align-content: center; justify-content: center;">
-            <div style="color: #aaa;">SHOW THE WORLD</div>
+            <div style="color: #aaa;">%BOTTOM_TEXT%</div>
         </div>
     </div>
 
     <div class="contentTextContainer">
         <div class="contentText">
-            If you started counting each current moment as a unique "now" (like saying "now" every second), you'd never
-            be
-            able to return to the "now" that has already passed! Each "now" is completely unique and unrepeatable, so
-            you're
-            literally living in one of the most unique moments in the universe every single second!
+            %CONTENT_TEXT%
         </div>
     </div>
 
+    %CONTENT_JS%
 
     <script>
-        function updateClock() {
-            const clockDiv = document.getElementById('dataitem');
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            clockDiv.textContent = `${hours}:${minutes}:${seconds}`;
-            adjustFontSize();
-        }
-
-        function adjustHeight() {
-            const fullHeightElement = document.getElementById('fullHeightElement');
-            fullHeightElement.style.height = `${window.innerHeight}px`;
-            console.log("Height calculated")
-            adjustFontSize();
-        }
-
-        function adjustFontSize() {
-            const fullHeightElement = document.getElementById('fullHeightElement');
-            fullHeightElement.style.height = `${window.innerHeight}px`;
-            const parent = document.getElementById('textParent');
-            const text = document.getElementById('dataitem');
-            let fontSize = 288; // Начальный размер шрифта
-            text.style.fontSize = '5px';
-            let height = parent.clientHeight;
-            text.style.fontSize = fontSize + 'px';
-            // Уменьшаем шрифт, пока текст не впишется в родительский элемент
-            while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
-                fontSize--;
-                text.style.fontSize = fontSize + 'px';
-                //break;
+        function updateTick() {
+            if (this.OnTick) {
+                this.OnTick();
             }
         }
+        function adjustSizes() {
+            const fullHeightElement = document.getElementById('fullHeightElement');
+            fullHeightElement.style.height = `${window.innerHeight}px`;
+            if (this.OnResizeContainer) {
+                this.OnResizeContainer();
+            }
+        }
+        adjustSizes();
+        updateTick();
 
-        setInterval(updateClock, 1000);
-        updateClock();
-        adjustHeight();
-
-        window.onresize = adjustHeight;
+        setInterval(updateTick, 1000);
+        window.onresize = adjustSizes;
     </script>
 </body>
 

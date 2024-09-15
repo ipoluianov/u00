@@ -1,0 +1,31 @@
+<script>
+    function adjustFontSize() {
+        const fullHeightElement = document.getElementById('fullHeightElement');
+        fullHeightElement.style.height = `${window.innerHeight}px`;
+        const parent = document.getElementById('textParent');
+        const text = document.getElementById('dataitem');
+        let fontSize = 288;
+        text.style.fontSize = '5px';
+        let height = parent.clientHeight;
+        text.style.fontSize = fontSize + 'px';
+        while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
+            fontSize--;
+            text.style.fontSize = fontSize + 'px';
+        }
+    }
+
+    this.OnResizeContainer = function () {
+        adjustFontSize();
+    }
+
+    this.OnTick = function () {
+        const clockDiv = document.getElementById('dataitem');
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        clockDiv.textContent = `${hours}:${minutes}:${seconds}`;
+        adjustFontSize();
+    }
+
+</script>

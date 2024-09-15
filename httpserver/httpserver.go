@@ -154,7 +154,7 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := c.s.GetPage(path)
+	page, err := c.s.GetPage(path)
 	if err != nil {
 		w.WriteHeader(404)
 		w.Write([]byte("not found"))
@@ -162,7 +162,14 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmp := string(static.Main_html)
-	tmp = strings.ReplaceAll(tmp, "%CONTENT%", string(res))
+	tmp = strings.ReplaceAll(tmp, "%TITLE%", string(page.Title))
+	tmp = strings.ReplaceAll(tmp, "%PAGE_HEADER%", string(page.Title))
+	tmp = strings.ReplaceAll(tmp, "%DESCRIPTION%", string(page.Description))
+	tmp = strings.ReplaceAll(tmp, "%KEYWORDS%", string(page.KeyWords))
+	tmp = strings.ReplaceAll(tmp, "%CONTENT_HTML%", string(page.HTML))
+	tmp = strings.ReplaceAll(tmp, "%CONTENT_JS%", string(page.JS))
+	tmp = strings.ReplaceAll(tmp, "%CONTENT_TEXT%", string(page.ContentText))
+	tmp = strings.ReplaceAll(tmp, "%BOTTOM_TEXT%", string(page.BottomText))
 
 	w.Write([]byte(tmp))
 }
