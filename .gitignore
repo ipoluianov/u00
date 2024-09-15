@@ -23,3 +23,9 @@ go.work.sum
 
 # env file
 .env
+
+/data/
+/logs/
+private.key
+bundle.crt
+.vscode/
