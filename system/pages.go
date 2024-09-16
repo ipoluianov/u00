@@ -47,7 +47,8 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 	folders, _ := findPageTxt("pages")
 	page.ViewHtml += `<div style="display: block;">`
 	for _, folder := range folders {
-		name := strings.ReplaceAll(folder, "pages/", "")
+		name := strings.ReplaceAll(folder, "pages/", "") // POSIX
+		name = strings.ReplaceAll(name, "pages\\", "")   // Win
 		p, _ := pages.Get(name)
 		page.ViewHtml += `<div><li><a href="/` + name + `">` + name + `</a> ` + p.Title + `</li></div>`
 	}
