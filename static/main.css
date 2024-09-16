@@ -2,6 +2,7 @@ body {
     font-size: 14pt;
     margin: 0px;
     background-color: #333;
+    font-family: 'Roboto';
 }
 
 div.contentTextContainer {
@@ -13,7 +14,6 @@ div.contentTextContainer {
 div.contentText {
     max-width: 600px;
     padding: 10px;
-    font-family: 'Courier New', Courier, monospace;
     color: #AAA;
 }
 
@@ -25,4 +25,9 @@ a {
 a:hover {
     color: #090;
     text-decoration: underline;
+}
+
+.fontMono {
+    font-family: 'Roboto Mono';
+    font-weight: 200;
 }

@@ -181,10 +181,10 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmp := string(static.Main_html)
-	tmp = strings.ReplaceAll(tmp, "%TITLE%", string(page.Title))
-	tmp = strings.ReplaceAll(tmp, "%PAGE_HEADER%", string(page.Title))
-	tmp = strings.ReplaceAll(tmp, "%DESCRIPTION%", string(page.Description))
-	tmp = strings.ReplaceAll(tmp, "%KEYWORDS%", string(page.KeyWords))
+	tmp = strings.ReplaceAll(tmp, "%TITLE%", page.Title+" - Full Screen - Live Update")
+	tmp = strings.ReplaceAll(tmp, "%PAGE_HEADER%", page.Title)
+	tmp = strings.ReplaceAll(tmp, "%DESCRIPTION%", page.Description+" - watch in full screen.")
+	tmp = strings.ReplaceAll(tmp, "%KEYWORDS%", page.KeyWords+", fullscreen, full, screen")
 
 	tmp = strings.ReplaceAll(tmp, "%VIEW_HTML%", string(page.ViewHtml))
 	tmp = strings.ReplaceAll(tmp, "%VIEW_SCRIPT%", string(page.ViewScript))

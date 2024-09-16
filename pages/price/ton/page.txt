@@ -1,0 +1,7 @@
+title:         TONCOIN Price
+keywords:      ton, toncoin, price
+description:   TONCOIN Price - TONUSDT
+bottom_text:   
+content_text:  TON (The Open Network) is a decentralized blockchain platform designed for fast transaction processing with low fees. Originally developed by the Telegram team, TON aims to support the mass adoption of cryptocurrencies and smart contracts, providing high speed, security, and scalability.
+view:          viewprice
+datasource:    /data/price-TONUSDT

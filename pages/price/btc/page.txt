@@ -1,7 +1,7 @@
-title:         Title - BTC PRICE1
-keywords:      time, key, words
-description:   description of the page
-bottom_text:   BottomText
-content_text:  If you started counting each current moment  as a unique "now" (like saying "now" every second), you'd never be able to return to the "now" that has already passed! Each "now"  is completely unique and unrepeatable, so you're literally living in one of the most unique moments  in the universe every single second!
-view:          viewtext
+title:         Bitcoin (BTC) price
+keywords:      btc, bitcoin, price
+description:   Bitcoin (BTC) price - BTCUSDT
+bottom_text:   
+content_text:  Bitcoin (BTC) is the first and largest decentralized cryptocurrency, created as a peer-to-peer digital currency. It operates without a central authority, enabling secure and transparent transactions on a global scale. Known for its limited supply and high level of security, Bitcoin is often referred to as "digital gold" and is widely used as both a store of value and a medium of exchange.
+view:          viewprice
 datasource:    /data/price-BTCUSDT

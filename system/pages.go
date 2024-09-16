@@ -52,6 +52,8 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 		p, _ := pages.Get(name)
 		page.ViewHtml += `<div><li><a href="/` + name + `">` + name + `</a> ` + p.Title + `</li></div>`
 	}
+	page.Title = "Real-Time Data View"
 	page.ViewHtml += `</div>`
+	page.ContentText = `Index page`
 	return
 }

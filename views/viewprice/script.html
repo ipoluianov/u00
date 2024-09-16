@@ -1,0 +1,85 @@
+<script>
+    function adjustFontSize() {
+        const fullHeightElement = document.getElementById('fullHeightElement');
+        fullHeightElement.style.height = `${window.innerHeight}px`;
+        const parent = document.getElementById('textParent');
+        const text = document.getElementById('dataitem');
+        let fontSize = 400;
+
+        const priceName = document.getElementById('priceName');
+        const price1 = document.getElementById('price1');
+        const price2 = document.getElementById('price2');
+
+        let color1 = '#AAA';
+        let color2 = '#AAA';
+
+        let k = 3;
+        console.log(this.data_Price1);
+        if (this.data_Price1 <= 0) {
+            k = 0.5;
+            color1 = '#555';
+            color2 = '#AAA';
+        }
+        if (this.data_Price1 > 0 && this.data_Price1 < 9) {
+            k = 1;
+            color1 = '#AAA';
+            color2 = '#AAA';
+        }
+        if (this.data_Price1 > 9) {
+            k = 3;
+            color1 = '#AAA';
+            color2 = '#555';
+        }
+
+        price1.style.color = color1;
+        price2.style.color = color2;
+
+        priceName.style.fontSize = '1px';
+        price1.style.fontSize = '1px';
+        price2.style.fontSize = '1px';
+        
+        let height = parent.clientHeight;
+
+        let priceNameK = 3;
+
+        priceName.style.fontSize = fontSize / priceNameK + 'px';
+        price1.style.fontSize = fontSize + 'px';
+        price2.style.fontSize = fontSize / k + 'px';
+
+        while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
+            
+            fontSize--;
+
+            priceName.style.fontSize = fontSize / priceNameK + 'px';
+            price1.style.fontSize = fontSize + 'px';
+            price2.style.fontSize = fontSize / k + 'px';
+        }
+    }
+
+    this.OnResizeContainer = function () {
+        adjustFontSize();
+    }
+
+    this.OnUpdateContent = function () {
+        adjustFontSize();
+    }
+
+    this.SetViewData = function (data) {
+        let item = JSON.parse(data)
+        const price1 = document.getElementById('price1');
+        const price2 = document.getElementById('price2');
+        const priceDT = document.getElementById('priceDT');
+        const priceName = document.getElementById('priceName');
+        price1.textContent = item.Price1;
+        price2.textContent = "." + item.Price2;
+        priceDT.textContent = item.DT;
+        priceName.textContent = item.Ticker;
+
+
+        this.data_Price1 = (item.Price1);
+        this.data_Price2 = (item.Price2);
+
+        this.OnUpdateContent();
+    }
+
+</script>

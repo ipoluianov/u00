@@ -1,7 +1,7 @@
-title:         Title - ETH PRICE
-keywords:      time, key, words
-description:   description of the page
-bottom_text:   BottomText
-content_text:  If you started counting each current moment  as a unique "now" (like saying "now" every second), you'd never be able to return to the "now" that has already passed! Each "now"  is completely unique and unrepeatable, so you're literally living in one of the most unique moments  in the universe every single second!
-view:          viewtext
+title:         Ethereum (ETH) Price
+keywords:      Ethereum, ETH, price
+description:   Ethereum (ETH) Price - ETHUSDT
+bottom_text:   
+content_text:  Ethereum (ETH) is a decentralized blockchain platform that enables the creation and execution of smart contracts and decentralized applications (dApps). Known for its versatility, Ethereum is the second-largest cryptocurrency by market capitalization and serves as the foundation for a wide range of decentralized finance (DeFi) projects, NFTs, and other blockchain-based innovations. It offers strong security, scalability, and a robust ecosystem for developers.
+view:          viewprice
 datasource:    /data/price-ETHUSDT

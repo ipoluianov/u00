@@ -1,0 +1,7 @@
+title:         Dogecoin (DOGE) Price
+keywords:      dogecoin, doge, price
+description:   Dogecoin (DOGE) Price - DOGEUSDT
+bottom_text:   
+content_text:  Dogecoin (DOGE) is a decentralized cryptocurrency originally created as a meme but has since gained popularity for its active community and low transaction fees. Based on the popular "Doge" internet meme, DOGE is often used for tipping, charitable donations, and microtransactions, known for its fast transactions and lighthearted culture.
+view:          viewprice
+datasource:    /data/price-DOGEUSDT

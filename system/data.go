@@ -4,13 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 )
 
 func (c *System) ThUpdateData() {
 	for {
 		c.UpdateData()
-		time.Sleep(3 * time.Second)
+		time.Sleep(1 * time.Second)
 	}
 }
 
@@ -22,7 +24,7 @@ func (c *System) UpdateData() {
 }
 
 func (c *System) GetCandles() {
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(50 * time.Millisecond)
 	requestLine := "https://api.bybit.com/v5/market/tickers?category=spot"
 	resp, err := http.Get(requestLine)
 	if err != nil {
@@ -49,8 +51,6 @@ func (c *System) GetCandles() {
 		RetMsg  string `json:"retMsg"`
 	}
 
-	type StringList []string
-
 	type Ticker struct {
 		Symbol    string `json:"symbol"`
 		LastPrice string `json:"lastPrice"`
@@ -72,7 +72,44 @@ func (c *System) GetCandles() {
 		fmt.Println("Unmarshal error:", err)
 	}
 
+	type PriceStruct struct {
+		DT     string
+		Ticker string
+		Price1 string
+		Price2 string
+	}
+
 	for _, ticker := range v.Result.List {
-		c.Set("price-"+ticker.Symbol, ticker.LastPrice)
+		price := ticker.LastPrice
+		price1 := price
+		price2 := ""
+		indexOfPoint := strings.Index(price, ".")
+		if indexOfPoint > -1 {
+			price1 = price[:indexOfPoint]
+			price2 = price[indexOfPoint+1:]
+
+			priceValue, err := strconv.ParseFloat(price, 64)
+			if err == nil {
+				if priceValue > 1 {
+					for len(price2) < 2 {
+						price2 += "0"
+					}
+				}
+
+				if priceValue < 1 {
+					for len(price2) < 6 {
+						price2 += "0"
+					}
+				}
+			}
+		}
+
+		var item PriceStruct
+		item.DT = time.Now().Format("2006-01-02 15:04:05")
+		item.Ticker = ticker.Symbol
+		item.Price1 = price1
+		item.Price2 = price2
+		bs, _ := json.MarshalIndent(item, "", " ")
+		c.Set("price-"+ticker.Symbol, string(bs))
 	}
 }
