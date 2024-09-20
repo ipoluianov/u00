@@ -3,7 +3,11 @@ package httpserver
 import (
 	"crypto/tls"
 	_ "embed"
+	"net"
 	"net/http"
+	"net/url"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/ipoluianov/gomisc/logger"
@@ -144,6 +148,16 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		path = parts[0]
 	}
 
+	if path == "public" {
+		c.processFile(w, r)
+		return
+	}
+
+	if path == "pages" {
+		c.processFile(w, r)
+		return
+	}
+
 	if path == "data" {
 		if len(parts) > 1 {
 			bs := c.s.Get(parts[1])
@@ -155,6 +169,12 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if path == "main.css" {
 		w.Header().Set("Content-Type", "text/css")
 		w.Write(static.Main_css)
+		return
+	}
+
+	if path == "cards.css" {
+		w.Header().Set("Content-Type", "text/css")
+		w.Write(static.Cards_css)
 		return
 	}
 
@@ -194,4 +214,131 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	tmp = strings.ReplaceAll(tmp, "%BOTTOM_TEXT%", string(page.BottomText))
 
 	w.Write([]byte(tmp))
+}
+
+func (c *HttpServer) processFile(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	if r.Method == "OPTIONS" {
+		w.Header().Set("Access-Control-Request-Method", "GET")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		return
+	}
+
+	c.file(w, r, r.URL.Path)
+}
+
+func (c *HttpServer) file(w http.ResponseWriter, r *http.Request, urlPath string) {
+	var err error
+	var fileContent []byte
+	var writtenBytes int
+
+	realIP := getRealAddr(r)
+
+	logger.Println("Real IP: ", realIP)
+	logger.Println("HttpServer processFile: ", r.URL.String())
+
+	var urlUnescaped string
+	urlUnescaped, err = url.QueryUnescape(urlPath)
+	if err == nil {
+		urlPath = urlUnescaped
+	}
+
+	if urlPath == "/" || urlPath == "" {
+		urlPath = "/index.html"
+	}
+
+	url, err := c.fullpath(urlPath, r.Host)
+
+	logger.Println("FullPath: " + url)
+
+	if strings.Contains(url, "..") {
+		logger.Println("Wrong FullPath")
+		w.WriteHeader(404)
+		return
+	}
+
+	if err != nil {
+		w.WriteHeader(404)
+		return
+	}
+
+	fileContent, err = os.ReadFile(url)
+
+	if err == nil {
+		w.Header().Set("Content-Type", c.contentTypeByExt(filepath.Ext(url)))
+		writtenBytes, err = w.Write(fileContent)
+		if err != nil {
+			logger.Println("HttpServer sendError w.Write error:", err)
+		}
+		if writtenBytes != len(fileContent) {
+			logger.Println("HttpServer sendError w.Write data size mismatch. (", writtenBytes, " / ", len(fileContent))
+		}
+	} else {
+		logger.Println("HttpServer processFile error: ", err)
+		w.WriteHeader(404)
+	}
+}
+
+func (c *HttpServer) contentTypeByExt(ext string) string {
+	var builtinTypesLower = map[string]string{
+		".css":  "text/css; charset=utf-8",
+		".gif":  "image/gif",
+		".htm":  "text/html; charset=utf-8",
+		".html": "text/html; charset=utf-8",
+		".jpeg": "image/jpeg",
+		".jpg":  "image/jpeg",
+		".js":   "text/javascript; charset=utf-8",
+		".mjs":  "text/javascript; charset=utf-8",
+		".pdf":  "application/pdf",
+		".png":  "image/png",
+		".svg":  "image/svg+xml",
+		".wasm": "application/wasm",
+		".webp": "image/webp",
+		".xml":  "text/xml; charset=utf-8",
+	}
+
+	logger.Println("Ext: ", ext)
+
+	if ct, ok := builtinTypesLower[ext]; ok {
+		return ct
+	}
+	return "text/plain"
+}
+
+func (c *HttpServer) fullpath(url string, _ string) (string, error) {
+	result := ""
+	result = logger.CurrentExePath() + "/" + url
+	fi, err := os.Stat(result)
+	if err == nil {
+		if fi.IsDir() {
+			result += "/index.html"
+		}
+	}
+	return result, err
+}
+
+func getRealAddr(r *http.Request) string {
+
+	remoteIP := ""
+	// the default is the originating ip. but we try to find better options because this is almost
+	// never the right IP
+	if parts := strings.Split(r.RemoteAddr, ":"); len(parts) == 2 {
+		remoteIP = parts[0]
+	}
+	// If we have a forwarded-for header, take the address from there
+	if xff := strings.Trim(r.Header.Get("X-Forwarded-For"), ","); len(xff) > 0 {
+		addrs := strings.Split(xff, ",")
+		lastFwd := addrs[len(addrs)-1]
+		if ip := net.ParseIP(lastFwd); ip != nil {
+			remoteIP = ip.String()
+		}
+		// parse X-Real-Ip header
+	} else if xri := r.Header.Get("X-Real-Ip"); len(xri) > 0 {
+		if ip := net.ParseIP(xri); ip != nil {
+			remoteIP = ip.String()
+		}
+	}
+
+	return remoteIP
+
 }

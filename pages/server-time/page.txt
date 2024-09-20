@@ -1,4 +1,4 @@
-title:         Title - ServerTime
+title:         ServerTime
 keywords:      server, time, key, words
 description:   description of the page
 bottom_text:    BottomText

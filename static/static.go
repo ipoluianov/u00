@@ -7,6 +7,9 @@ import (
 //go:embed main.css
 var Main_css []byte
 
+//go:embed cards.css
+var Cards_css []byte
+
 //go:embed main.js
 var Main_js []byte
 

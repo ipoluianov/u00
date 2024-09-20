@@ -8,24 +8,39 @@
     <meta name="description" content="%DESCRIPTION%">
     <meta name="keywords" content="%KEYWORDS%">
     <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/cards.css">
     <script src="/main.js"></script>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <div style="height: 100vh;display: flex;flex-direction: column;" id="fullHeightElement">
         <div
-            style="display: flex; align-items: center; justify-content: center; text-align: center;background-color: #222; height: 60px;">
-            <div style="color: #aaa;">%PAGE_HEADER%</div>
+            style="display: flex;flex-direction: row; align-items: stretch; justify-content: space-between; text-align: center;background-color: #222; height: 60px;">
+                <div
+                    style="display: flex; justify-content: center; align-items: center; background-color:#555;color: #aaa;">
+                    <a href="/">
+                        <div style="width: 70px;height: 60px;display: flex; justify-content: center; align-items: center;">U00</div>
+                    </a>
+                </div>
+            <div
+                style="padding: 10px; display: flex; justify-content: center; align-items: center; background-color:#555; color: #aaa;">
+                %PAGE_HEADER%</div>
+            <div
+                style="width: 70px; padding: 10px; display: flex; justify-content: center; align-items: center; background-color:#444; color: #aaa;">
+                MENU</div>
         </div>
 
         <div style="flex-grow: 1;display: flex;color: #AAA;padding: 20px;">
@@ -38,7 +53,7 @@
     </div>
 
     %VIEW_SCRIPT%
-    
+
     %PAGE_SCRIPT%
 
     <div class="contentTextContainer">

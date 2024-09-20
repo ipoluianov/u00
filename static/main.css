@@ -31,3 +31,11 @@ a:hover {
     font-family: 'Roboto Mono';
     font-weight: 200;
 }
+
+.contentDataParent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

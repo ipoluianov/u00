@@ -1,16 +1,15 @@
 <script>
     function adjustFontSize() {
-        const fullHeightElement = document.getElementById('fullHeightElement');
-        fullHeightElement.style.height = `${window.innerHeight}px`;
-        const parent = document.getElementById('textParent');
-        const text = document.getElementById('dataitem');
+        const contentDataParent = document.getElementById('contentDataParent');
+        const contentData = document.getElementById('contentData');
+
         let fontSize = 288;
-        text.style.fontSize = '5px';
-        let height = parent.clientHeight;
-        text.style.fontSize = fontSize + 'px';
-        while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
+        contentData.style.fontSize = '5px';
+        let height = contentDataParent.clientHeight;
+        contentData.style.fontSize = fontSize + 'px';
+        while (contentData.scrollWidth > contentDataParent.clientWidth || contentData.scrollHeight > height) {
             fontSize--;
-            text.style.fontSize = fontSize + 'px';
+            contentData.style.fontSize = fontSize + 'px';
         }
     }
 
@@ -23,8 +22,8 @@
     }
 
     this.SetViewData = function (data) {
-        const text = document.getElementById('dataitem');
-        text.textContent = data;
+        const contentDataText = document.getElementById('contentDataText');
+        contentDataText.textContent = data;
         this.OnUpdateContent();
     }
 
