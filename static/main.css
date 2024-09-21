@@ -27,6 +27,17 @@ a:hover {
     text-decoration: underline;
 }
 
+a.header {
+    font-size: 24pt;
+    color: #FFF;
+    text-decoration: none;
+}
+
+a.header:hover {
+    color: #090;
+    text-decoration: none;
+}
+
 .fontMono {
     font-family: 'Roboto Mono';
     font-weight: 200;
