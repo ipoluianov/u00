@@ -54,7 +54,7 @@
         </div>
         <div id="settings">
         </div>
-        <div
+        <div id="bottomBar"
             style="background-color: #222; height: 60px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
             <div><button onclick="btnSettings()" class="bottomButtons" style="font-size: 32pt;">⚙</button></div>
             <div style="color: #aaa;">%BOTTOM_TEXT%</div>
@@ -84,7 +84,8 @@
                 const fullHeightElement = document.getElementById('fullHeightElement');
                 fullHeightElement.style.height = `${window.innerHeight}px`;
             } else {
-                fullHeightElement.style.minHeight = `600px`;
+                //fullHeightElement.style.minHeight = `600px`;
+                bottomBar.style.display = "none";
             }
 
             if (this.OnResizeContainer) {

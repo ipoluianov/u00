@@ -9,6 +9,7 @@ div.contentTextContainer {
     text-align: center;
     display: flex;
     justify-content: center;
+    border-top: 1px solid #555555;
 }
 
 div.contentText {
