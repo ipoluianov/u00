@@ -102,6 +102,8 @@ func (c *System) GetCandles() {
 					}
 				}
 			}
+		} else {
+			price2 = "00"
 		}
 
 		var item PriceStruct
