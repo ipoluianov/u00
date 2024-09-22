@@ -20,7 +20,7 @@
     }
     a.card_unit_link {
         color:#65bded;
-        text-decoration: none;
+        text-decoration: underline;
         text-underline-offset: 5px;
     }
     a.card_unit_link:hover {
@@ -39,7 +39,6 @@
     div.card_content_text {
         margin-top: 10px;
         font-size: 12pt;
-		
     }
     div.card_content_desc {
         margin-top: 10px;
