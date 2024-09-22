@@ -1,7 +1,7 @@
 title:         Current Time
 keywords:      time, key, words
 description:   description of the page
-bottom_text:   BottomText
+bottom_text:   
 content_text:  If you started counting each current moment  as a unique "now" (like saying "now" every second), you'd never be able to return to the "now" that has already passed! Each "now"  is completely unique and unrepeatable, so you're literally living in one of the most unique moments  in the universe every single second!
 view:          viewtext
 datasource:    
