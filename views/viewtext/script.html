@@ -2,6 +2,7 @@
     function adjustFontSize() {
         const contentDataParent = document.getElementById('contentDataParent');
         const contentData = document.getElementById('contentData');
+        contentData.style.color = settingsGetColor()
 
         let fontSize = 288;
         contentData.style.fontSize = '5px';
@@ -25,11 +26,6 @@
         const contentDataText = document.getElementById('contentDataText');
         contentDataText.textContent = data;
         this.OnUpdateContent();
-    }
-
-    this.OnSettings = function () {
-        const settings = document.getElementById('settings');
-        settings.innerHTML = 'SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>SETTINGS OF TEXT<br>';
     }
 
 </script>

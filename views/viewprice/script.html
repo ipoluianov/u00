@@ -10,11 +10,7 @@
         const price1 = document.getElementById('price1');
         const price2 = document.getElementById('price2');
 
-        let PRICE_COLOR = getCookie('priceColor');
-        if (PRICE_COLOR === null) {
-            setCookie('priceColor', 'white', 365);
-            PRICE_COLOR = getCookie('priceColor');
-        }
+        let PRICE_COLOR = settingsGetColor()
 
         let color1 = PRICE_COLOR;
         let color2 = PRICE_COLOR;
@@ -86,23 +82,5 @@
         this.data_Price2 = (item.Price2);
 
         this.OnUpdateContent();
-    }
-
-    this.ViewPriceSetWhite = function () {
-        setCookie('priceColor', '#FFF', 365);
-        adjustFontSize();
-    }
-
-    this.ViewPriceSetGreen = function () {
-        setCookie('priceColor', '#0F5', 365);
-        adjustFontSize();
-    }
-
-    this.OnSettings = function () {
-        const settings = document.getElementById('settings');
-        settings.innerHTML = `
-        <button onclick='ViewPriceSetWhite()'>WHITE</button>
-        <button onclick='ViewPriceSetGreen()'>GREEN</button>
-        `;
     }
 </script>

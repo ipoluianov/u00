@@ -22,3 +22,21 @@ function getCookie(name) {
     }
     return null;
 }
+
+
+function settingsGetColor() {
+    return getCookie('settingsColor') || '#FFF';
+}
+
+function btnFullscreen() {
+    const elem = document.getElementById("viewDiv");
+
+    if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => {
+            alert(`Error: ${err.message}`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+    adjustSizes();
+}
