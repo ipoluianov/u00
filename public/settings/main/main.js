@@ -1,6 +1,6 @@
 const settingsElement = document.getElementById('settings');
 settingsElement.style.backgroundColor = '#244';
-settingsElement.style.height = '64px';
+settingsElement.style.minHeight = '64px';
 settingsElement.style.display = 'none';
 
 this.btnSettings = function () {
@@ -17,7 +17,12 @@ function hideSettings() {
 }
 
 function loadSettings() {
+    console.log('loadSettings');
     settingsElement.style.display = 'block';
+    if (this.OnSettings) {
+        console.log('loadSettings1');
+        this.OnSettings();
+    }
     adjustSizes();
 }
 

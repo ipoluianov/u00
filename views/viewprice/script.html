@@ -10,24 +10,30 @@
         const price1 = document.getElementById('price1');
         const price2 = document.getElementById('price2');
 
-        let color1 = '#AAA';
-        let color2 = '#AAA';
+        let PRICE_COLOR = getCookie('priceColor');
+        if (PRICE_COLOR === null) {
+            setCookie('priceColor', 'white', 365);
+            PRICE_COLOR = getCookie('priceColor');
+        }
+
+        let color1 = PRICE_COLOR;
+        let color2 = PRICE_COLOR;
 
         let k = 3;
         console.log(this.data_Price1);
         if (this.data_Price1 <= 0) {
             k = 0.5;
             color1 = '#555';
-            color2 = '#AAA';
+            color2 = PRICE_COLOR;
         }
         if (this.data_Price1 > 0 && this.data_Price1 < 9) {
             k = 1;
-            color1 = '#AAA';
-            color2 = '#AAA';
+            color1 = PRICE_COLOR;
+            color2 = PRICE_COLOR;
         }
         if (this.data_Price1 > 9) {
             k = 3;
-            color1 = '#AAA';
+            color1 = PRICE_COLOR;
             color2 = '#555';
         }
 
@@ -82,4 +88,21 @@
         this.OnUpdateContent();
     }
 
+    this.ViewPriceSetWhite = function () {
+        setCookie('priceColor', '#FFF', 365);
+        adjustFontSize();
+    }
+
+    this.ViewPriceSetGreen = function () {
+        setCookie('priceColor', '#0F5', 365);
+        adjustFontSize();
+    }
+
+    this.OnSettings = function () {
+        const settings = document.getElementById('settings');
+        settings.innerHTML = `
+        <button onclick='ViewPriceSetWhite()'>WHITE</button>
+        <button onclick='ViewPriceSetGreen()'>GREEN</button>
+        `;
+    }
 </script>
