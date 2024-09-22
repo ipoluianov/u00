@@ -1,7 +1,5 @@
 <script>
     function adjustFontSize() {
-        const fullHeightElement = document.getElementById('fullHeightElement');
-        fullHeightElement.style.height = `${window.innerHeight}px`;
         const parent = document.getElementById('textParent');
         const text = document.getElementById('dataitem');
         let fontSize = 400;
@@ -75,7 +73,7 @@
         price1.textContent = item.Price1;
         price2.textContent = "." + item.Price2;
         priceDT.textContent = item.DT;
-        priceName.textContent = item.Ticker;
+        priceName.textContent = item.Name;
 
 
         this.data_Price1 = (item.Price1);

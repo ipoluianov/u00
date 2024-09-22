@@ -75,6 +75,7 @@ func (c *System) GetCandles() {
 	type PriceStruct struct {
 		DT     string
 		Ticker string
+		Name   string
 		Price1 string
 		Price2 string
 	}
@@ -109,6 +110,7 @@ func (c *System) GetCandles() {
 		var item PriceStruct
 		item.DT = time.Now().Format("2006-01-02 15:04:05")
 		item.Ticker = ticker.Symbol
+		item.Name = strings.ReplaceAll(ticker.Symbol, "USDT", "")
 		item.Price1 = price1
 		item.Price2 = price2
 		bs, _ := json.MarshalIndent(item, "", " ")
