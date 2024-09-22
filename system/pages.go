@@ -87,7 +87,23 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 
 	page.Title = "Real-Time Data View"
 	page.ViewHtml += `</div></div>`
-	page.ContentText = `Index page`
+	page.ContentText = `
+	<div>Welcome to U00.IO<div>
+A minimalist platform designed for real-time monitoring of key metrics. Each page is dedicated to displaying a single parameter in full screen, optimized for instant access and clear visibility. Whether it's the current time, live Bitcoin prices, or any other important data, our pages provide a seamless, distraction-free experience.
+<br/>
+Key Features:
+<br/>
+
+Full-Screen Display: Each metric is shown in full screen, making it perfect for large displays or quick glances on mobile devices.
+<br/>
+
+Live Updates: All data is updated in real-time, ensuring you're always up-to-date with the latest information.
+<br/>
+
+Simple Navigation: Easily switch between different metrics, or set your favorite pages as shortcuts for one-tap access.
+<br/>
+
+Stay informed at a glance with our clean, real-time monitoring pages. Perfect for both personal and professional use.`
 	return
 }
 
