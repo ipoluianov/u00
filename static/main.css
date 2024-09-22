@@ -50,3 +50,17 @@ a.header:hover {
     justify-content: center;
     align-items: center;
 }
+
+button.bottomButtons {
+    background-color: #00000000; 
+    color: #aaa; 
+    font-size: 24pt; 
+    border: 0px solid #000; 
+    width: 60px; 
+    height: 60px; 
+    cursor: pointer;
+}
+
+button.bottomButtons:hover {
+    color: #5ee86e;
+}

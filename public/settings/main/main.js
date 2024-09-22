@@ -1,11 +1,9 @@
-console.log("SETTINGS MAIN JS");
 const settingsElement = document.getElementById('settings');
 settingsElement.style.backgroundColor = '#244';
 settingsElement.style.height = '64px';
 settingsElement.style.display = 'none';
 
 this.btnSettings = function () {
-    console.log("SETTINGS BUTTON");
     if (settingsElement.style.display === 'none') {
         loadSettings();
     } else {
@@ -14,15 +12,14 @@ this.btnSettings = function () {
 }
 
 function hideSettings() {
-    console.log("HIDE SETTINGS");
     settingsElement.style.display = 'none';
+    adjustSizes();
 }
 
 function loadSettings() {
-    console.log("LOAD SETTINGS");
     settingsElement.style.display = 'block';
+    adjustSizes();
 }
-
 
 function btnFullscreen() {
     const elem = document.getElementById("viewDiv");
@@ -34,4 +31,5 @@ function btnFullscreen() {
     } else {
         document.exitFullscreen();
     }
+    adjustSizes();
 }
