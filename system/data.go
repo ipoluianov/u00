@@ -80,6 +80,8 @@ func (c *System) GetCandles() {
 		Price2 string
 	}
 
+	fmt.Println(v.Result.List)
+
 	for _, ticker := range v.Result.List {
 		price := ticker.LastPrice
 		price1 := price

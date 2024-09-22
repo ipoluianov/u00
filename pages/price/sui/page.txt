@@ -1,0 +1,7 @@
+title:         SUI Price
+keywords:      SUI, price
+description:   SUI Price - SUIUSDT
+bottom_text:   
+content_text:  Sui (SUI) is a high-performance decentralized blockchain platform designed to prioritize scalability and low-latency transactions. Built with a focus on speed and security, Sui aims to provide an efficient infrastructure for decentralized applications (dApps) and smart contracts. Its unique consensus mechanism and architecture allow for fast processing and a smooth user experience, making it suitable for various blockchain-based solutions.
+view:          viewprice
+datasource:    /data/price-SUIUSDT
