@@ -155,8 +155,8 @@ button.bottomButtons:hover {
 }
 
 html {
-    /*scrollbar-color: #555 #2c2c2c;
-    scrollbar-width: auto;*/
+    scrollbar-color: #555 #2c2c2c;
+    scrollbar-width: auto;
 }
 
 /* For WebKit (Chrome, Safari, Edge) */
