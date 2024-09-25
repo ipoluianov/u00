@@ -89,7 +89,7 @@ button.bottomButtons:hover {
 
 html {
     scrollbar-color: #555 #2c2c2c;
-    scrollbar-width: thin;
+    scrollbar-width: auto;
 }
 
 /* For WebKit (Chrome, Safari, Edge) */
