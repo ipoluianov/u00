@@ -3,5 +3,5 @@ keywords:      time, 2024, 2025, remaining, year
 description:   Time remaining until the end of the year 2024
 bottom_text:   
 content_text:  
-view:          viewtext
+view:          viewheadertext
 datasource:    

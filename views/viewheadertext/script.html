@@ -1,0 +1,60 @@
+<script>
+    function adjustFontSize() {
+        const parent = document.getElementById('textParent');
+        const text = document.getElementById('dataitem');
+        let fontSize = 400;
+
+        const dataName = document.getElementById('dataName');
+        const dataValue1 = document.getElementById('dataValue1');
+        const dataValue2 = document.getElementById('dataValue2');
+        const dataComment = document.getElementById('dataComment');
+
+        dataName.style.fontSize = '1px';
+
+        dataValue1.style.color = settingsGetColor();
+        dataValue1.style.fontSize = '1px';
+
+        dataValue2.style.color = settingsGetColor();
+        dataValue2.style.fontSize = '1px';
+
+        dataComment.style.fontSize = '1px';
+
+        let height = parent.clientHeight;
+        let dataNameK = 3;
+        let dataCommentK = 10;
+
+        dataName.style.fontSize = fontSize / dataNameK + 'px';
+        dataValue1.style.fontSize = fontSize + 'px';
+        dataValue2.style.fontSize = fontSize + 'px';
+        dataComment.style.fontSize = fontSize / dataCommentK + 'px';
+        
+        while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
+            fontSize--;
+            dataName.style.fontSize = fontSize / dataNameK + 'px';
+            dataValue1.style.fontSize = fontSize + 'px';
+            dataValue2.style.fontSize = fontSize + 'px';
+            dataComment.style.fontSize = fontSize / dataCommentK + 'px';
+        }
+    }
+
+    this.OnResizeContainer = function () {
+        adjustFontSize();
+    }
+
+    this.OnUpdateContent = function () {
+        adjustFontSize();
+    }
+
+    this.SetViewData = function (data) {
+        let item = JSON.parse(data)
+        const dataName = document.getElementById('dataName');
+        const dataValue1 = document.getElementById('dataValue1');
+        const dataValue2 = document.getElementById('dataValue2');
+        const dataComment = document.getElementById('dataComment');
+        dataName.textContent = item.Name;
+        dataValue1.textContent = item.Value1;
+        dataValue2.textContent = item.Value2;
+        dataComment.textContent = item.Comment;
+        this.OnUpdateContent();
+    }
+</script>
