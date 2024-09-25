@@ -17,6 +17,7 @@ func readPageFile(code string) (map[string]string, error) {
 	if err != nil {
 		return result, err
 	}
+
 	lines := strings.Split(string(bs), "\n")
 	for _, line := range lines {
 		index := strings.Index(line, ":")
@@ -29,6 +30,12 @@ func readPageFile(code string) (map[string]string, error) {
 		value = strings.Trim(value, " \r\n\t")
 		result[name] = value
 	}
+
+	bsContent, err := os.ReadFile(path + "/pages/" + code + "/content.html")
+	if err == nil && len(bsContent) > 0 {
+		result["content_text"] = string(bsContent)
+	}
+
 	return result, nil
 }
 
