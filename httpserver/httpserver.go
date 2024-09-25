@@ -166,27 +166,9 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if path == "main.css" {
-		w.Header().Set("Content-Type", "text/css")
-		w.Write(static.Main_css)
-		return
-	}
-
 	if path == "favicon.ico" {
 		w.Header().Set("Content-Type", "image/x-icon")
 		w.Write(static.Favicon_ico)
-		return
-	}
-
-	if path == "cards.css" {
-		w.Header().Set("Content-Type", "text/css")
-		w.Write(static.Cards_css)
-		return
-	}
-
-	if path == "main.js" {
-		w.Header().Set("Content-Type", "application/javascript")
-		w.Write(static.Main_js)
 		return
 	}
 

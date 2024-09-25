@@ -25,7 +25,30 @@ function getCookie(name) {
 
 
 function settingsGetColor() {
-    return getCookie('settingsColor') || '#FFF';
+    return getCookie('settingsColor') || '#888888';
+}
+
+function btnInvertColors() {
+    if (document.body.id == "lightThemeContainer") {
+        document.body.id = "darkThemeContainer";
+        localStorage.setItem("colorTheme", "dark");
+    } else {
+        document.body.id = "lightThemeContainer";
+        localStorage.setItem("colorTheme", "light");
+    }
+}
+
+function loadColorTheme() {
+    const colorTheme = localStorage.getItem("colorTheme");
+    if (colorTheme == "light") {
+        document.body.id = "lightThemeContainer";
+    } else {
+        if (colorTheme == "dark") {
+            document.body.id = "darkThemeContainer";
+        } else {
+            document.body.id = "lightThemeContainer";
+        }
+    }
 }
 
 function btnFullscreen() {

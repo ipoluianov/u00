@@ -1,8 +1,70 @@
 body {
-    font-size: 14pt;
     margin: 0px;
-    background-color: #333;
+    font-size: 14pt;
     font-family: 'Roboto';
+}
+
+#lightThemeContainer {
+    background-color: #eee;
+    color: #111;
+}
+
+#darkThemeContainer {
+    background-color: #333;
+    color: #EEE;
+}
+
+#lightThemeContainer #viewDiv {
+    flex-grow: 1;
+    display: flex;
+    padding: 20px;
+    background-color: #eee;
+}
+
+#darkThemeContainer #viewDiv {
+    flex-grow: 1;
+    display: flex;
+    padding: 20px;
+    background-color: #333;
+}
+
+#lightThemeContainer #pageHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    text-align: center;
+    height: 64px;
+    border-bottom: 2px solid #888;
+}
+
+#darkThemeContainer #pageHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #181818;
+    height: 64px;
+}
+
+#lightThemeContainer #bottomBar {
+    background-color: #EEE;
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #888;
+}
+
+#darkThemeContainer #bottomBar {
+    background-color: #181818;
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 div.contentTextContainer {
@@ -15,7 +77,6 @@ div.contentTextContainer {
 div.contentText {
     max-width: 600px;
     padding: 10px;
-    color: #AAA;
     text-align: justify;
 }
 
@@ -77,8 +138,14 @@ button.bottomButtons:hover {
     cursor: pointer;
 }
 
-.bottomButtonImage {
-    opacity: 0.6;
+#darkThemeContainer .bottomButtonImage {
+    opacity: 0.9;
+    width: 64px; 
+    height: 64px;
+}
+
+#lightThemeContainer .bottomButtonImage {
+    opacity: 0.8;
     width: 64px; 
     height: 64px;
 }
@@ -88,8 +155,8 @@ button.bottomButtons:hover {
 }
 
 html {
-    scrollbar-color: #555 #2c2c2c;
-    scrollbar-width: auto;
+    /*scrollbar-color: #555 #2c2c2c;
+    scrollbar-width: auto;*/
 }
 
 /* For WebKit (Chrome, Safari, Edge) */

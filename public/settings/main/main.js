@@ -28,21 +28,6 @@ function loadSettings() {
     adjustSizes();
 }
 
-function SettingsColorSetWhite() {
-    setCookie('settingsColor', '#FFF', 365);
-    if (this.OnUpdateContent) this.OnUpdateContent();
-}
-
-function SettingsColorSetGreen() {
-    setCookie('settingsColor', '#0F5', 365);
-    if (this.OnUpdateContent) this.OnUpdateContent();
-}
-
-function SettingsColorSetRed() {
-    setCookie('settingsColor', '#F24', 365);
-    if (this.OnUpdateContent) this.OnUpdateContent();
-}
-
 function SettingsSetColor(color) {
     setCookie('settingsColor', color, 365);
     if (this.OnUpdateContent) this.OnUpdateContent();
@@ -51,16 +36,22 @@ function SettingsSetColor(color) {
 this.OnSettings = function () {
     const settings = document.getElementById('settings');
     settings.innerHTML = `
-<div style="display: flex; flex-direction: row; align-items: center;" >
+<div>
     <div style="padding-left: 12px; padding-right: 12px; color: #aaa;">COLOR:</div>
-    <button style="background-color: #EEE" class="select-color-button" onclick="SettingsSetColor('#EEE')"></button>
-    <button style="background-color: #1E90FF" class="select-color-button" onclick="SettingsSetColor('#1E90FF')"></button>
-    <button style="background-color: #00BFFF" class="select-color-button" onclick="SettingsSetColor('#00BFFF')"></button>
-    <button style="background-color: #8A2BE2" class="select-color-button" onclick="SettingsSetColor('#8A2BE2')"></button>
-    <button style="background-color: #3EB489" class="select-color-button" onclick="SettingsSetColor('#3EB489')"></button>
-    <button style="background-color: #4CAF50" class="select-color-button" onclick="SettingsSetColor('#4CAF50')"></button>
-    <button style="background-color: #FF9800" class="select-color-button" onclick="SettingsSetColor('#FF9800')"></button>
-    <button style="background-color: #FFEB3B" class="select-color-button" onclick="SettingsSetColor('#FFEB3B')"></button>
+    <div style="display: flex; flex-direction: row; align-items: center;" >
+        <button style="background-color: #FFFFFF" class="select-color-button" onclick="SettingsSetColor('#FFFFFF')"></button>
+        <button style="background-color: #888888" class="select-color-button" onclick="SettingsSetColor('#888888')"></button>
+        <button style="background-color: #000000" class="select-color-button" onclick="SettingsSetColor('#000000')"></button>
+        <button style="background-color: #1E90FF" class="select-color-button" onclick="SettingsSetColor('#1E90FF')"></button>
+        <button style="background-color: #00BFFF" class="select-color-button" onclick="SettingsSetColor('#00BFFF')"></button>
+    </div>
+    <div style="display: flex; flex-direction: row; align-items: center;" >
+        <button style="background-color: #8A2BE2" class="select-color-button" onclick="SettingsSetColor('#8A2BE2')"></button>
+        <button style="background-color: #3EB489" class="select-color-button" onclick="SettingsSetColor('#3EB489')"></button>
+        <button style="background-color: #4CAF50" class="select-color-button" onclick="SettingsSetColor('#4CAF50')"></button>
+        <button style="background-color: #FF9800" class="select-color-button" onclick="SettingsSetColor('#FF9800')"></button>
+        <button style="background-color: #FFEB3B" class="select-color-button" onclick="SettingsSetColor('#FFEB3B')"></button>
+    </div>
 </div>
 `;
 }
