@@ -2,38 +2,38 @@
     function adjustFontSize() {
         const parent = document.getElementById('textParent');
         const text = document.getElementById('dataitem');
-        let fontSize = 400;
+        let fontSize = 400.0;
 
         const dataName = document.getElementById('dataName');
         const dataValue1 = document.getElementById('dataValue1');
         const dataValue2 = document.getElementById('dataValue2');
         const dataComment = document.getElementById('dataComment');
 
-        dataName.style.fontSize = '1px';
+        dataName.style.fontSize = 'pt';
 
         dataValue1.style.color = settingsGetColor();
-        dataValue1.style.fontSize = '1px';
+        dataValue1.style.fontSize = 'pt';
 
         dataValue2.style.color = settingsGetColor();
-        dataValue2.style.fontSize = '1px';
+        dataValue2.style.fontSize = 'pt';
 
-        dataComment.style.fontSize = '1px';
+        dataComment.style.fontSize = 'pt';
 
         let height = parent.clientHeight;
-        let dataNameK = 3;
-        let dataCommentK = 10;
+        let dataNameK = 3.0;
+        let dataCommentK = 10.0;
 
-        dataName.style.fontSize = fontSize / dataNameK + 'px';
-        dataValue1.style.fontSize = fontSize + 'px';
-        dataValue2.style.fontSize = fontSize + 'px';
-        dataComment.style.fontSize = fontSize / dataCommentK + 'px';
+        dataName.style.fontSize = fontSize / dataNameK + 'pt';
+        dataValue1.style.fontSize = fontSize + 'pt';
+        dataValue2.style.fontSize = fontSize + 'pt';
+        dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
         
         while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
             fontSize--;
-            dataName.style.fontSize = fontSize / dataNameK + 'px';
-            dataValue1.style.fontSize = fontSize + 'px';
-            dataValue2.style.fontSize = fontSize + 'px';
-            dataComment.style.fontSize = fontSize / dataCommentK + 'px';
+            dataName.style.fontSize = fontSize / dataNameK + 'pt';
+            dataValue1.style.fontSize = fontSize + 'pt';
+            dataValue2.style.fontSize = fontSize + 'pt';
+            dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
         }
     }
 
