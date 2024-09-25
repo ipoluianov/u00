@@ -35,7 +35,7 @@
         dataComment.style.fontSize = '1pt';
 
         let width = parent.clientWidth - 100;
-        let height = parent.clientHeight - 150;
+        let height = parent.clientHeight - 100;
         let dataNameK = 3.0;
         let dataCommentK = 10.0;
 
@@ -55,13 +55,13 @@
             let s4 = getTextSize(dataComment.textContent, fontSize / dataCommentK, dataName.style.fontFamily);
             maxWidth = Math.max(s1.width, s2.width, s3.width, s4.width);
             sumHeight = s1.height + s2.height + s3.height + s4.height;
-            if (fontSize < 8) {
+            if (fontSize < 1) {
                 break;
             }
-            console.log(maxWidth, sumHeight, fontSize);
+            //console.log(maxWidth, sumHeight, fontSize);
         }
-        console.log(maxWidth, sumHeight, fontSize);
-        console.log('---------------------------------')
+        //console.log(maxWidth, sumHeight, fontSize);
+        //console.log('---------------------------------')
 
         dataName.style.fontSize = fontSize / dataNameK + 'pt';
         dataValue1.style.fontSize = fontSize + 'pt';
