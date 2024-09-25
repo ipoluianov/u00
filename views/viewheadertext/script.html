@@ -35,6 +35,8 @@
             dataValue2.style.fontSize = fontSize + 'pt';
             dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
         }
+
+        dataComment.textContent = "[" + dataName.style.fontSize + "]"
     }
 
     this.OnResizeContainer = function () {
@@ -54,7 +56,7 @@
         dataName.textContent = item.Name;
         dataValue1.textContent = item.Value1;
         dataValue2.textContent = item.Value2;
-        dataComment.textContent = item.Comment;
+        //dataComment.textContent = item.Comment;
         this.OnUpdateContent();
     }
 </script>
