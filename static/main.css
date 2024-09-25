@@ -16,6 +16,7 @@ div.contentText {
     max-width: 600px;
     padding: 10px;
     color: #AAA;
+    text-align: justify;
 }
 
 a {
