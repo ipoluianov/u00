@@ -21,13 +21,12 @@
 
         let height = parent.clientHeight;
         let dataNameK = 3.0;
-        let dataCommentK = 2.0;
+        let dataCommentK = 10.0;
 
         dataName.style.fontSize = fontSize / dataNameK + 'pt';
         dataValue1.style.fontSize = fontSize + 'pt';
         dataValue2.style.fontSize = fontSize + 'pt';
         dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
-        //dataComment.style.fontSize = '18pt';
         
         while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
             fontSize--;
@@ -37,7 +36,7 @@
             dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
         }
 
-        dataComment.textContent = "[" + dataName.style.fontSize + "]"
+        //dataComment.textContent = "[" + dataName.style.fontSize + "]"
     }
 
     this.OnResizeContainer = function () {
@@ -57,7 +56,7 @@
         dataName.textContent = item.Name;
         dataValue1.textContent = item.Value1;
         dataValue2.textContent = item.Value2;
-        //dataComment.textContent = item.Comment;
+        dataComment.textContent = item.Comment;
         this.OnUpdateContent();
     }
 </script>
