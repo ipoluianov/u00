@@ -1,4 +1,22 @@
 <script>
+    function getTextSize(text, fontSize, fontFamily) {
+        let hiddenDiv = document.createElement('div');
+
+        hiddenDiv.style.position = 'absolute';
+        hiddenDiv.style.visibility = 'hidden';
+        hiddenDiv.style.whiteSpace = 'nowrap';
+        hiddenDiv.style.fontSize = fontSize + 'pt';
+        hiddenDiv.style.fontFamily = fontFamily;
+        hiddenDiv.textContent = text;
+        document.body.appendChild(hiddenDiv);
+        let textSize = {
+            width: hiddenDiv.clientWidth,
+            height: hiddenDiv.clientHeight
+        };
+        document.body.removeChild(hiddenDiv);
+        return textSize;
+    }
+
     function adjustFontSize() {
         const parent = document.getElementById('textParent');
         const text = document.getElementById('dataitem');
@@ -16,28 +34,41 @@
         dataValue2.style.fontSize = '1pt';
         dataComment.style.fontSize = '1pt';
 
-        let height = parent.clientHeight;
+        let width = parent.clientWidth - 100;
+        let height = parent.clientHeight - 150;
         let dataNameK = 3.0;
         let dataCommentK = 10.0;
 
+        /*dataName.style.fontSize = fontSize / dataNameK + 'pt';
+        dataValue1.style.fontSize = fontSize + 'pt';
+        dataValue2.style.fontSize = fontSize + 'pt';
+        dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
+        
+*/
+        let maxWidth = 1000000;
+        let sumHeight = 1000000;
+        while (maxWidth > width || sumHeight > height) {
+            fontSize -= 5;
+            let s1 = getTextSize(dataName.textContent, fontSize / dataNameK, dataName.style.fontFamily);
+            let s2 = getTextSize(dataValue1.textContent, fontSize, dataName.style.fontFamily);
+            let s3 = getTextSize(dataValue2.textContent, fontSize, dataName.style.fontFamily);
+            let s4 = getTextSize(dataComment.textContent, fontSize / dataCommentK, dataName.style.fontFamily);
+            maxWidth = Math.max(s1.width, s2.width, s3.width, s4.width);
+            sumHeight = s1.height + s2.height + s3.height + s4.height;
+            if (fontSize < 8) {
+                break;
+            }
+            console.log(maxWidth, sumHeight, fontSize);
+        }
+        console.log(maxWidth, sumHeight, fontSize);
+        console.log('---------------------------------')
+
         dataName.style.fontSize = fontSize / dataNameK + 'pt';
         dataValue1.style.fontSize = fontSize + 'pt';
-        window.getComputedStyle(dataValue1).fontSize;
         dataValue2.style.fontSize = fontSize + 'pt';
-        window.getComputedStyle(dataValue2).fontSize;
         dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
 
-        while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
-            fontSize--;
-            dataName.style.fontSize = fontSize / dataNameK + 'pt';
-            dataValue1.style.fontSize = fontSize + 'pt';
-            window.getComputedStyle(dataValue1).fontSize;
-            dataValue2.style.fontSize = fontSize + 'pt';
-            window.getComputedStyle(dataValue2).fontSize;
-            dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
-        }
 
-        //dataComment.textContent = "[" + dataName.style.fontSize + "]"
     }
 
     this.OnResizeContainer = function () {
