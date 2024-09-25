@@ -1,0 +1,7 @@
+title:         BNB price
+keywords:      bnb, price
+description:   BNB price - BNBUSDT
+bottom_text:   BNB Price
+content_text:  BNB (Binance Coin) is the native cryptocurrency of the Binance ecosystem, initially created to facilitate trading fee discounts on the Binance exchange. Over time, BNB has evolved to power the Binance Smart Chain (BSC), supporting decentralized applications (dApps), DeFi platforms, and various blockchain projects. BNB is known for its utility within the Binance ecosystem, fast transaction speeds, and diverse use cases, including staking, payments, and token burning.
+view:          viewprice
+datasource:    /data/price-BNBUSDT

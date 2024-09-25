@@ -1,0 +1,7 @@
+title:         Solana (SOL) price
+keywords:      sol, solana, price
+description:   Solana (SOL) price - SOLUSDT
+bottom_text:   Solana Price
+content_text:  Solana (SOL) is a high-performance blockchain platform designed for decentralized applications (dApps) and crypto-assets. It is known for its fast transaction processing and low fees, thanks to its innovative Proof of History (PoH) consensus mechanism. Solana's scalability makes it ideal for handling high throughput, enabling it to support complex decentralized finance (DeFi) platforms, NFTs, and other blockchain-based innovations.
+view:          viewprice
+datasource:    /data/price-SOLUSDT

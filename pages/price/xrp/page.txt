@@ -1,0 +1,7 @@
+title:         Ripple (XRP) price
+keywords:      xrp, ripple, price
+description:   Ripple (XRP) price - XRPUSDT
+bottom_text:   Ripple Price
+content_text:  XRP is a digital payment protocol and cryptocurrency designed for fast, low-cost international money transfers. It is the native token of the Ripple network, which facilitates real-time gross settlement, currency exchange, and remittance systems. XRP's primary goal is to improve the efficiency of cross-border transactions by providing liquidity and reducing the time and cost associated with traditional financial systems.
+view:          viewprice
+datasource:    /data/price-XRPUSDT
