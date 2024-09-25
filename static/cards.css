@@ -20,7 +20,7 @@
     }
     a.card_unit_link {
         color:#65bded;
-        text-decoration: underline;
+        text-decoration: none;
         text-underline-offset: 2px;
     }
     a.card_unit_link:hover {
