@@ -61,6 +61,7 @@ button.bottomButtons {
     width: 64px; 
     height: 64px; 
     cursor: pointer;
+    padding: 0px;
 }
 
 button.bottomButtons:hover {
