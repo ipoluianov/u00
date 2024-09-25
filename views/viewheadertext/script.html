@@ -22,14 +22,18 @@
 
         dataName.style.fontSize = fontSize / dataNameK + 'pt';
         dataValue1.style.fontSize = fontSize + 'pt';
+        dataValue1.offsetWidth;
         dataValue2.style.fontSize = fontSize + 'pt';
+        dataValue2.offsetWidth;
         dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
-        
+
         while (text.scrollWidth > parent.clientWidth || text.scrollHeight > height) {
             fontSize--;
             dataName.style.fontSize = fontSize / dataNameK + 'pt';
             dataValue1.style.fontSize = fontSize + 'pt';
+            dataValue1.offsetWidth;
             dataValue2.style.fontSize = fontSize + 'pt';
+            dataValue2.offsetWidth;
             dataComment.style.fontSize = fontSize / dataCommentK + 'pt';
         }
 
