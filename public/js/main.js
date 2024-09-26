@@ -46,7 +46,7 @@ function loadColorTheme() {
         if (colorTheme == "dark") {
             document.body.id = "darkThemeContainer";
         } else {
-            document.body.id = "lightThemeContainer";
+            document.body.id = "darkThemeContainer";
         }
     }
 }
