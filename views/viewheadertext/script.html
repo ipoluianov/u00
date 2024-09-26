@@ -34,7 +34,7 @@
         dataValue2.style.fontSize = '1pt';
         dataComment.style.fontSize = '1pt';
 
-        let width = parent.clientWidth - 100;
+        let width = parent.clientWidth - 48;
         let height = parent.clientHeight - 24;
         let dataNameK = 3.0;
         let dataCommentK = 10.0;
@@ -62,6 +62,8 @@
         }
         //console.log(maxWidth, sumHeight, fontSize);
         //console.log('---------------------------------')
+
+        fontSize = fontSize * 0.9;
 
         dataName.style.fontSize = fontSize / dataNameK + 'pt';
         dataValue1.style.fontSize = fontSize + 'pt';
