@@ -29,7 +29,7 @@ function loadSettings() {
 }
 
 function SettingsSetColor(color) {
-    setCookie('settingsColor', color, 365);
+    localStorage.setItem('settingsColor', color);
     if (this.OnUpdateContent) this.OnUpdateContent();
 }
 

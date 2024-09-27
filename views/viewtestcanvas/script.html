@@ -13,7 +13,6 @@
 
     this.OnResizeContainer = function () {
         adjustFontSize();
-        console.log(this.OnNextDraw)
     }
 
     this.OnUpdateContent = function () {
@@ -24,15 +23,14 @@
         this.OnUpdateContent();
     }
 
-
     this.animationIsStarted = false;
-
+    this.startAnimationTimer = null;
     this.StartAnimation = function (data) {
         if (this.OnDraw != undefined && this.OnDraw != null && animationIsStarted == false) {
             requestAnimationFrame(this.OnDraw);
             animationIsStarted = true;
+            clearInterval(this.startAnimationTimer);
         }
     }
-
-    setInterval(this.StartAnimation, 100);
+    this.startAnimationTimer = setInterval(this.StartAnimation, 1);
 </script>

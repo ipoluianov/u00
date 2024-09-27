@@ -237,7 +237,7 @@ func (c *HttpServer) file(w http.ResponseWriter, r *http.Request, urlPath string
 
 	url, err := c.fullpath(urlPath, r.Host)
 
-	logger.Println("FullPath: " + url)
+	//logger.Println("FullPath: " + url)
 
 	if strings.Contains(url, "..") {
 		logger.Println("Wrong FullPath")
