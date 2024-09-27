@@ -1,0 +1,7 @@
+title:         Test Canvas
+keywords:      test
+description:   Test
+bottom_text:   Test
+content_text:  Test Text 
+view:          viewtestcanvas
+datasource:    /data/price-BTCUSDT

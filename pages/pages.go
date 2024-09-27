@@ -82,12 +82,12 @@ func Get(code string) (page common.Page, err error) {
 	dataSource := pageMap["datasource"]
 	page.PageScript = read(code, "script.html")
 	if len(dataSource) > 0 {
-		page.PageScript = `
+		page.PageScript += `
 <script>
     this.OnTick = function () {
         fetch('%DATASOURCE%')
             .then(response => response.text())
-            .then(data => this.SetViewData(data));
+            .then(data => {this.currentDataStr = data; this.SetViewData(data);});
     }
 </script>
 		`

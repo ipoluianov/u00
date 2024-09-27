@@ -1,0 +1,34 @@
+<script>
+    function adjustFontSize() {
+        const canvas = document.getElementById('cnv');
+        const container = document.getElementById('textParent');
+
+        canvas.width = window.innerWidth * 1 - 40 - 20;
+        canvas.height = window.innerHeight * 1 - 128 - 40;
+    }
+
+    this.OnResizeContainer = function () {
+        adjustFontSize();
+        console.log(this.OnNextDraw)
+    }
+
+    this.OnUpdateContent = function () {
+        adjustFontSize();
+    }
+
+    this.SetViewData = function (data) {
+        this.OnUpdateContent();
+    }
+
+
+    this.animationIsStarted = false;
+
+    this.StartAnimation = function (data) {
+        if (this.OnDraw != undefined && this.OnDraw != null && animationIsStarted == false) {
+            requestAnimationFrame(this.OnDraw);
+            animationIsStarted = true;
+        }
+    }
+
+    setInterval(this.StartAnimation, 100);
+</script>
