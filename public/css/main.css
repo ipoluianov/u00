@@ -17,14 +17,14 @@ body {
 #lightThemeContainer #viewDiv {
     flex-grow: 1;
     display: flex;
-    padding: 20px;
+    padding: 0px;
     background-color: #eee;
 }
 
 #darkThemeContainer #viewDiv {
     flex-grow: 1;
     display: flex;
-    padding: 20px;
+    padding: 0px;
     background-color: #333;
 }
 

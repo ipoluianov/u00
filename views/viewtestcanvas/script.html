@@ -2,9 +2,13 @@
     function adjustFontSize() {
         const canvas = document.getElementById('cnv');
         const container = document.getElementById('textParent');
-
-        canvas.width = window.innerWidth * 1 - 40 - 20;
-        canvas.height = window.innerHeight * 1 - 128 - 40;
+        canvas.width = document.documentElement.clientWidth;
+        canvas.height = document.documentElement.clientHeight - 128;
+        if (document.fullscreenElement != undefined && document.fullscreenElement != null) {
+            console.log(document.fullscreenElement);
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
     }
 
     this.OnResizeContainer = function () {
