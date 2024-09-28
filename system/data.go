@@ -7,6 +7,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/ipoluianov/gomisc/logger"
 )
 
 func (c *System) ThUpdateData() {
@@ -28,7 +30,7 @@ func (c *System) GetCandles() {
 	requestLine := "https://api.bybit.com/v5/market/tickers?category=spot"
 	resp, err := http.Get(requestLine)
 	if err != nil {
-		fmt.Println(err)
+		logger.Println(err)
 		return
 	}
 	//fmt.Println("Status:", resp.StatusCode)
@@ -69,7 +71,7 @@ func (c *System) GetCandles() {
 	var v GetCandlesResponse
 	err = json.Unmarshal(data, &v)
 	if err != nil {
-		fmt.Println("Unmarshal error:", err)
+		logger.Println(err)
 	}
 
 	type PriceStruct struct {
@@ -79,8 +81,6 @@ func (c *System) GetCandles() {
 		Price1 string
 		Price2 string
 	}
-
-	fmt.Println(v.Result.List)
 
 	for _, ticker := range v.Result.List {
 		price := ticker.LastPrice
