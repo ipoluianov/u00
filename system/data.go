@@ -71,7 +71,7 @@ func (c *System) GetCandles() {
 	var v GetCandlesResponse
 	err = json.Unmarshal(data, &v)
 	if err != nil {
-		logger.Println(err)
+		logger.Println(err, string(data))
 	}
 
 	type PriceStruct struct {
