@@ -6,6 +6,22 @@ function settingsGetColor() {
     return localStorage.getItem("settingsColor", "dark") || '#888888';
 }
 
+function sBackColor() {
+    if (document.body.id == "lightThemeContainer") {
+        return '#EEE';
+    } else {
+        return '#222';
+    }
+}
+
+function sColor() {
+    return localStorage.getItem("settingsColor", "dark") || '#888888';
+}
+
+function sFontFamily() {   
+    return 'Roboto Mono';
+}
+
 function btnInvertColors() {
     if (document.body.id == "lightThemeContainer") {
         document.body.id = "darkThemeContainer";

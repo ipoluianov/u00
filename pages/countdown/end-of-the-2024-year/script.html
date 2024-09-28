@@ -16,17 +16,24 @@
         return `${days} days ${hours}:${minutes}:${seconds}`;
     }
 
-    this.OnTick = function () {
-        let name = "Time until the end of 2024";
-        let value = timeUntilDateTime("2025-01-01 00:00:00");
-        let parts = value.split("days")
-        let v1 = parts[0] + " days";
-        let v2 = parts[1];
-        if (parts.length < 2) {
-            v1 = value
-            v2 = ""
-        }
+</script>
 
-        this.SetViewData(JSON.stringify({Name: name, Value1: v1, Value2: v2, Comment: "until 2025-01-01 00:00:00 (local time)"}));
+<script type="module">
+    import { TextWithHeader } from '/public/cnv/text_with_header.js';
+    export class App extends TextWithHeader {
+        tick() {
+            let name = "Time until the end of 2024";
+            let value = timeUntilDateTime("2025-01-01 00:00:00");
+            let parts = value.split("days")
+            let v1 = parts[0] + " days";
+            let v2 = parts[1];
+            if (parts.length < 2) {
+                v1 = value
+                v2 = ""
+            }
+
+            this.data = { Name: name, Value1: v1, Value2: v2, Comment: "until 2025-01-01 00:00:00 (local time)" };
+        }
     }
+    window.app = new App();
 </script>

@@ -7,7 +7,6 @@ import (
 
 	"github.com/ipoluianov/gomisc/logger"
 	"github.com/ipoluianov/u00/common"
-	"github.com/ipoluianov/u00/views"
 )
 
 func readPageFile(code string) (map[string]string, error) {
@@ -74,10 +73,6 @@ func Get(code string) (page common.Page, err error) {
 	page.BottomText = pageMap["bottom_text"]
 	page.KeyWords = pageMap["keywords"]
 	page.ContentText = pageMap["content_text"]
-	vCode := pageMap["view"]
-	v := views.Get(vCode)
-	page.ViewHtml = v.Html
-	page.ViewScript = v.Script
 
 	dataSource := pageMap["datasource"]
 	page.PageScript = read(code, "script.html")

@@ -1,6 +1,17 @@
 <script>
 
-    function timeUntilSixPM() {
+    
+</script>
+
+<script type="module">
+    import { TextWithHeader } from '/public/cnv/text_with_header.js';
+    export class App extends TextWithHeader {
+        tick() {
+            let name = "Time until the end of 2024";
+            this.data = { Name: name, Value1: "", Value2: this.timeUntilSixPM(), Comment: "until 2025-01-01 00:00:00 (local time)" };
+        }
+
+        timeUntilSixPM() {
         const now = new Date();
         const sixPM = new Date(now);
         sixPM.setHours(18, 0, 0, 0);
@@ -13,8 +24,6 @@
         const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
         return `${hours}:${minutes}:${seconds}`;
     }
-
-    this.OnTick = function () {
-        this.SetViewData(timeUntilSixPM());
     }
+    window.app = new App();
 </script>

@@ -28,6 +28,15 @@ body {
     background-color: #333;
 }
 
+#lightThemeContainer #settings {
+    background-color: #eee;
+    border-top: 1px solid #555555;
+}
+
+#darkThemeContainer #settings {
+    background-color: #333;
+}
+
 #lightThemeContainer #pageHeader {
     display: flex;
     flex-direction: row;

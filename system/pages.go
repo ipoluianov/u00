@@ -61,7 +61,7 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 	`
 
 	folders, _ := findPageTxt("pages")
-	page.ViewHtml += `<div style="display: block;"> <div class="card_container">`
+	page.PageScript += `<div style="display: block;"> <div class="card_container">`
 	for _, folder := range folders {
 		name := strings.ReplaceAll(folder, "pages/", "") // POSIX
 		name = strings.ReplaceAll(name, "pages\\", "")   // Win
@@ -82,12 +82,12 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 		itemHtml = strings.ReplaceAll(itemHtml, "%IMG_SRC%", imgUrl)
 		itemHtml = strings.ReplaceAll(itemHtml, "%TEXT%", p.Title)
 		itemHtml = strings.ReplaceAll(itemHtml, "%DESCRIPTION%", "")
-		page.ViewHtml += itemHtml
+		page.PageScript += itemHtml
 	}
 
 	page.Title = "Real-Time Data View"
-	page.ViewHtml += `</div></div>`
-	page.ContentText = `
+	page.PageScript += `</div></div>`
+	page.PageScript += `
 	<div>Welcome to U00.IO<div>
 A minimalist platform designed for real-time monitoring of key metrics. Each page is dedicated to displaying a single parameter in full screen, optimized for instant access and clear visibility. Whether it's the current time, live Bitcoin prices, or any other important data, our pages provide a seamless, distraction-free experience.
 <br/>

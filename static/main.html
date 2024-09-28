@@ -2,15 +2,15 @@
 <html>
 
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-28YBM2Y63F"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-28YBM2Y63F"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-28YBM2Y63F');
-</script>
+        gtag('config', 'G-28YBM2Y63F');
+    </script>
 
     <title>%TITLE%</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,31 +50,73 @@
                 <a class="header" href="/">
                     <div
                         style="width: 64px;height: 64px;display: flex; justify-content: center; align-items: center; text-decoration: none;">
-                    <img src="/public/icons/logo64.png" />    
+                        <img src="/public/icons/logo64.png" />
                     </div>
                 </a>
             </div>
             <div style="padding: 10px; display: flex; justify-content: center; align-items: center;">
                 %PAGE_HEADER%</div>
-            <div
-                style="width: 70px; padding: 10px; display: flex; justify-content: center; align-items: center;">
-                <button onclick="btnInvertColors()" class="bottomButtons" style="font-size: 32pt;"><img class="bottomButtonImage" src="/public/icons/invert-colors.png" /></button>                
+            <div style="width: 70px; padding: 10px; display: flex; justify-content: center; align-items: center;">
+                <button onclick="btnInvertColors()" class="bottomButtons" style="font-size: 32pt;"><img
+                        class="bottomButtonImage" src="/public/icons/invert-colors.png" /></button>
             </div>
         </div>
 
         <div id="viewDiv">
-            %VIEW_HTML%
+            <div id="textParent" style="width: 100%; height: 100%;overflow: hidden;">
+                <canvas id="cnv" style="display: block; box-sizing: border-box;">
+                </canvas>
+            </div>
         </div>
         <div id="settings">
         </div>
         <div id="bottomBar">
-            <button onclick="btnSettings()" class="bottomButtons" style="font-size: 32pt;"><img class="bottomButtonImage" src="/public/icons/cog.png" /></button>
+            <button onclick="btnSettings()" class="bottomButtons" style="font-size: 32pt;"><img
+                    class="bottomButtonImage" src="/public/icons/cog.png" /></button>
             <div>%BOTTOM_TEXT%</div>
-            <button onclick="btnFullscreen()" class="bottomButtons"><img class="bottomButtonImage" src="/public/icons/fullscreen.png" /></button>
+            <button onclick="btnFullscreen()" class="bottomButtons"><img class="bottomButtonImage"
+                    src="/public/icons/fullscreen.png" /></button>
         </div>
     </div>
 
-    %VIEW_SCRIPT%
+    <script>
+        function adjustFontSize() {
+            const canvas = document.getElementById('cnv');
+            const container = document.getElementById('textParent');
+            canvas.width = document.documentElement.clientWidth;
+            canvas.height = document.documentElement.clientHeight - 128;
+
+            canvas.height = canvas.height - window.sSettingsHeight;
+
+            if (document.fullscreenElement != undefined && document.fullscreenElement != null) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        }
+
+        this.OnResizeContainer = function () {
+            adjustFontSize();
+        }
+
+        this.OnUpdateContent = function () {
+            adjustFontSize();
+        }
+
+        this.SetViewData = function (data) {
+            this.OnUpdateContent();
+        }
+
+        this.animationIsStarted = false;
+        this.startAnimationTimer = null;
+        this.StartAnimation = function (data) {
+            if (this.OnDraw != undefined && this.OnDraw != null && animationIsStarted == false) {
+                requestAnimationFrame(this.OnDraw);
+                animationIsStarted = true;
+                clearInterval(this.startAnimationTimer);
+            }
+        }
+        this.startAnimationTimer = setInterval(this.StartAnimation, 1);
+    </script>
 
     %PAGE_SCRIPT%
 
@@ -85,13 +127,21 @@
     </div>
 
     <script>
+
+        this.OnDraw = function () {
+            if (this.app != undefined && this.app != null) {
+                this.app.drawBase(this.currentDataStr);
+            }
+            requestAnimationFrame(this.OnDraw);
+        }
+
         function updateTick() {
             if (this.OnTick) {
                 this.OnTick();
             }
         }
         function adjustSizes() {
-            if (window.location.pathname != "/") {                
+            if (window.location.pathname != "/") {
                 const fullHeightElement = document.getElementById('fullHeightElement');
                 fullHeightElement.style.height = `${window.innerHeight}px`;
             } else {

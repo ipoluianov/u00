@@ -194,8 +194,8 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	tmp = strings.ReplaceAll(tmp, "%DESCRIPTION%", page.Description+" - watch in full screen.")
 	tmp = strings.ReplaceAll(tmp, "%KEYWORDS%", page.KeyWords+", fullscreen, full, screen")
 
-	tmp = strings.ReplaceAll(tmp, "%VIEW_HTML%", string(page.ViewHtml))
-	tmp = strings.ReplaceAll(tmp, "%VIEW_SCRIPT%", string(page.ViewScript))
+	//tmp = strings.ReplaceAll(tmp, "%VIEW_HTML%", string(page.ViewHtml))
+	//tmp = strings.ReplaceAll(tmp, "%VIEW_SCRIPT%", string(page.ViewScript))
 	tmp = strings.ReplaceAll(tmp, "%PAGE_SCRIPT%", string(page.PageScript))
 
 	tmp = strings.ReplaceAll(tmp, "%CONTENT_TEXT%", string(page.ContentText))

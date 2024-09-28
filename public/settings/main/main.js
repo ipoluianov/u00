@@ -1,9 +1,6 @@
 const settingsElement = document.getElementById('settings');
-settingsElement.style.backgroundColor = '#222';
-settingsElement.style.topBottom = '1px solid #444';
-settingsElement.style.borderBottom = '1px solid #444';
-settingsElement.style.minHeight = '64px';
 settingsElement.style.display = 'none';
+this.sSettingsHeight = 0;
 
 this.btnSettings = function () {
     if (settingsElement.style.display === 'none') {
@@ -14,11 +11,17 @@ this.btnSettings = function () {
 }
 
 function hideSettings() {
+    this.sSettingsHeight = 0;
     settingsElement.style.display = 'none';
     adjustSizes();
 }
 
 function loadSettings() {
+    this.sSettingsHeight = 200;
+    settingsElement.style.minHeight = '200px';
+    settingsElement.style.maxHeight = '200px';
+    settingsElement.style.height = '200px';
+
     console.log('loadSettings');
     settingsElement.style.display = 'block';
     if (this.OnSettings) {
@@ -37,7 +40,7 @@ this.OnSettings = function () {
     const settings = document.getElementById('settings');
     settings.innerHTML = `
 <div>
-    <div style="padding-left: 12px; padding-right: 12px; color: #aaa;">COLOR:</div>
+    <div style="padding-left: 12px; padding-right: 12px;">COLOR:</div>
     <div style="display: flex; flex-direction: row; align-items: center;" >
         <button style="background-color: #FFFFFF" class="select-color-button" onclick="SettingsSetColor('#FFFFFF')"></button>
         <button style="background-color: #888888" class="select-color-button" onclick="SettingsSetColor('#888888')"></button>

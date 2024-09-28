@@ -1,13 +1,6 @@
 package views
 
-import (
-	"os"
-
-	"github.com/ipoluianov/gomisc/logger"
-	"github.com/ipoluianov/u00/common"
-)
-
-func read(code string, fileName string) (content string) {
+/*func read(code string, fileName string) (content string) {
 	path := logger.CurrentExePath()
 	bs, err := os.ReadFile(path + "/views/" + code + "/" + fileName)
 	if err != nil {
@@ -15,10 +8,10 @@ func read(code string, fileName string) (content string) {
 	}
 	content = string(bs)
 	return
-}
+}*/
 
-func Get(code string) (view common.View) {
+/*func Get(code string) (view common.View) {
 	view.Html = read(code, "html.html")
 	view.Script = read(code, "script.html")
 	return
-}
+}*/
