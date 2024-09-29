@@ -83,6 +83,11 @@
         function adjustFontSize() {
             const canvas = document.getElementById('cnv');
             const container = document.getElementById('textParent');
+            if (window.location.pathname == "/") {
+                canvas.width = 0;
+                canvas.height = 0;
+                return;
+            }
             canvas.width = document.documentElement.clientWidth;
             canvas.height = document.documentElement.clientHeight - 128;
 
@@ -140,19 +145,23 @@
                 this.OnTick();
             }
         }
+
         function adjustSizes() {
+            //console.log("Adjusting sizes");
             if (window.location.pathname != "/") {
                 const fullHeightElement = document.getElementById('fullHeightElement');
                 fullHeightElement.style.height = `${window.innerHeight}px`;
             } else {
                 //fullHeightElement.style.minHeight = `600px`;
                 bottomBar.style.display = "none";
+                
             }
 
             if (this.OnResizeContainer) {
                 this.OnResizeContainer();
             }
         }
+
         adjustSizes();
         updateTick();
 
