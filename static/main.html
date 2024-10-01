@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/main.css">
     <link rel="stylesheet" type="text/css" href="/public/css/cards.css">
     <script src="/public/js/main.js"></script>
+    <script src="/public/js/application.js"></script>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,10 +65,11 @@
 
         <div id="viewDiv">
             <div id="textParent" style="width: 100%; height: 100%;overflow: hidden;">
-                <canvas id="cnv" style="display: block; box-sizing: border-box;">
+                <canvas id="cnv" widget-id="" class="widget" style="display: block; box-sizing: border-box;">
                 </canvas>
             </div>
         </div>
+
         <div id="settings">
         </div>
         <div id="bottomBar">
@@ -170,6 +172,10 @@
     </script>
 
     <script src="/public/settings/main/main.js"></script>
+
+    <script>
+        runApp();
+    </script>
 </body>
 
 </html>
