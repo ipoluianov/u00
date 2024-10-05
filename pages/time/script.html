@@ -1,6 +1,9 @@
 <script type="module">
     import { FullText } from '/public/cnv/full_text.js';
     export class App extends FullText {
+        constructor(id) {
+            super(id);
+        }
         tick() {
             // console.log('tick');
             const now = new Date();
@@ -10,5 +13,5 @@
             this.data = `${hours}:${minutes}:${seconds}`;
         }
     }
-    window.app = new App();
+    window.app = new App('cnv');
 </script>

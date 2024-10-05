@@ -1,6 +1,8 @@
 export class AppBase {
-    constructor() {
+    constructor(elId) {
+
         this.ctx = null;
+        this.elId = elId;
         this.fontFamily = 'Consolas';
         this.lastDrawTime = Date.now();
 
@@ -22,7 +24,7 @@ export class AppBase {
         this.lastDrawTime = currentTimeInMs;
         //////////////////////////////////////////////////
 
-        const canvas = document.getElementById('cnv');
+        const canvas = document.getElementById(this.elId);
         this.ctx = canvas.getContext('2d');
 
         this.width = canvas.width;

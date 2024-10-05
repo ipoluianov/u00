@@ -1,8 +1,8 @@
 import { AppBase } from './app.js';
 
 export class FullText extends AppBase {
-    constructor() {
-        super();
+    constructor(elId) {
+        super(elId);
     }
 
     draw() {
