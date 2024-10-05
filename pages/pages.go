@@ -76,6 +76,7 @@ func Get(code string) (page common.Page, err error) {
 
 	dataSource := pageMap["datasource"]
 	page.PageScript = read(code, "script.html")
+	page.TickScript = read(code, "tick.js")
 	if len(dataSource) > 0 {
 		page.PageScript += `
 <script>

@@ -10,7 +10,7 @@ function sBackColor() {
     if (document.body.id == "lightThemeContainer") {
         return '#EEE';
     } else {
-        return '#222';
+        return '#0F0F0F';
     }
 }
 

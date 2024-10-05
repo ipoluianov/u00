@@ -1,9 +1,11 @@
 package system
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/ipoluianov/gomisc/logger"
 	"github.com/ipoluianov/u00/common"
@@ -14,7 +16,39 @@ func (c *System) GetPage(path string) (page common.Page, err error) {
 	if path == "index" {
 		return c.GetPageIndex()
 	}
-	return pages.Get(path)
+
+	p, err := pages.Get(path)
+	if err != nil {
+		return
+	}
+
+	pageScript := `
+<div id="textParent" style="width: 100%; height: 100%;overflow: hidden;">
+	<canvas id="APP_cnv" app-id="APP" class="widget" style="display: block; box-sizing: border-box;"></canvas>
+</div>
+<script>
+	APP = {};		
+
+	APP.id = "APP";
+	APP.data = {};
+	APP.tick = function() {};
+	APP.draw = function(elId) {};
+
+	APP_CODE
+
+	window.fullScreenCanvas = APP_cnv;
+</script>`
+
+	appId := "app_" + fmt.Sprint(time.Now().UnixMicro())
+
+	itemHtml := pageScript
+
+	itemHtml = strings.ReplaceAll(itemHtml, "APP_CODE", p.TickScript)
+	itemHtml = strings.ReplaceAll(itemHtml, "APP", ""+appId)
+
+	p.PageScript = itemHtml
+
+	return p, nil
 }
 
 func findPageTxt(root string) ([]string, error) {
@@ -46,23 +80,34 @@ func findPageTxt(root string) ([]string, error) {
 
 func (c *System) GetPageIndex() (page common.Page, err error) {
 
-	cardHtml := `
-	
+	cardHtml := `	
 		<div class="card_unit ani">
 			<a href="%URL%" class="card_unit_link">
 				<div class="card_content">
-					<div class="card_content_img"><img class="card_content_image" src="%IMG_SRC%"/></div>
+					<div class="card_content_img">
+		                <canvas id="APP_CNV" app-id="APP" class="widget" style="display: block; box-sizing: border-box; width:340px; height:190px;">
+                		</canvas>
+						<script>
+							APP = {};
+
+							APP.id = "APP";
+							APP.data = {};
+							APP.tick = function() {};
+							APP.draw = function(elId) {};
+
+							APP_CODE
+						</script>
+					</div>
 					<div class="card_content_text">%TEXT%</div>
 				</div>
 			</a>
 		</div>
-	
-	
 	`
 
 	folders, _ := findPageTxt("pages")
 	page.PageScript += `<div style="display: block;"> <div class="card_container">`
 	for _, folder := range folders {
+		appId := "app_" + fmt.Sprint(time.Now().UnixMicro())
 		name := strings.ReplaceAll(folder, "pages/", "") // POSIX
 		name = strings.ReplaceAll(name, "pages\\", "")   // Win
 		p, _ := pages.Get(name)
@@ -82,6 +127,11 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 		itemHtml = strings.ReplaceAll(itemHtml, "%IMG_SRC%", imgUrl)
 		itemHtml = strings.ReplaceAll(itemHtml, "%TEXT%", p.Title)
 		itemHtml = strings.ReplaceAll(itemHtml, "%DESCRIPTION%", "")
+
+		itemHtml = strings.ReplaceAll(itemHtml, "APP_CNV", appId+"_cnv")
+		itemHtml = strings.ReplaceAll(itemHtml, "APP_CODE", p.TickScript)
+		itemHtml = strings.ReplaceAll(itemHtml, "APP", appId)
+
 		page.PageScript += itemHtml
 	}
 

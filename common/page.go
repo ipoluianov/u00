@@ -7,4 +7,5 @@ type Page struct {
 	ContentText string `json:"content_text"`
 	BottomText  string `json:"bottom_text"`
 	PageScript  string `json:"page_script"`
+	TickScript  string `json:"tick_script"`
 }

@@ -1,7 +1,0 @@
-title:         Time until workday ends (6pm)
-keywords:      time, remaining, workday, end
-description:   Remaining time until the end of the workday (6pm)
-bottom_text:   
-content_text:  
-view:          viewtext
-datasource:    

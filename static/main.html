@@ -64,10 +64,7 @@
         </div>
 
         <div id="viewDiv">
-            <div id="textParent" style="width: 100%; height: 100%;overflow: hidden;">
-                <canvas id="cnv" widget-id="" class="widget" style="display: block; box-sizing: border-box;">
-                </canvas>
-            </div>
+            %PAGE_SCRIPT%
         </div>
 
         <div id="settings">
@@ -83,21 +80,19 @@
 
     <script>
         function adjustFontSize() {
-            const canvas = document.getElementById('cnv');
-            const container = document.getElementById('textParent');
-            if (window.location.pathname == "/") {
-                canvas.width = 0;
-                canvas.height = 0;
-                return;
-            }
-            canvas.width = document.documentElement.clientWidth;
-            canvas.height = document.documentElement.clientHeight - 128;
+            console.log("FULL SCREEN CNV", window.fullScreenCanvas);
+            if (window.fullScreenCanvas != null && window.fullScreenCanvas != undefined) {
+                const canvas = window.fullScreenCanvas;
+                const container = document.getElementById('textParent');
+                
+                canvas.width = document.documentElement.clientWidth;
+                canvas.height = document.documentElement.clientHeight - 128;
+                //canvas.height = canvas.height - window.sSettingsHeight;
 
-            canvas.height = canvas.height - window.sSettingsHeight;
-
-            if (document.fullscreenElement != undefined && document.fullscreenElement != null) {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+                if (document.fullscreenElement != undefined && document.fullscreenElement != null) {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
             }
         }
 
@@ -123,9 +118,10 @@
             }
         }
         this.startAnimationTimer = setInterval(this.StartAnimation, 1);
+
+        adjustFontSize();
     </script>
 
-    %PAGE_SCRIPT%
 
     <div class="contentTextContainer">
         <div class="contentText">
@@ -136,8 +132,8 @@
     <script>
 
         this.OnDraw = function () {
-            if (this.app != undefined && this.app != null) {
-                this.app.drawBase(this.currentDataStr);
+            if (this.appDraw != undefined && this.appDraw != null) {
+                this.appDraw();
             }
             requestAnimationFrame(this.OnDraw);
         }
@@ -156,7 +152,7 @@
             } else {
                 //fullHeightElement.style.minHeight = `600px`;
                 bottomBar.style.display = "none";
-                
+
             }
 
             if (this.OnResizeContainer) {
@@ -169,6 +165,8 @@
 
         setInterval(updateTick, 1000);
         window.onresize = adjustSizes;
+
+        adjustFontSize();
     </script>
 
     <script src="/public/settings/main/main.js"></script>
