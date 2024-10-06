@@ -51,6 +51,10 @@
         border-radius: 10px;
     }
 
+    .widget:hover {
+        opacity: 1;
+    }
+
     div.card_content {
         padding: 0px;
         min-width: 0px;

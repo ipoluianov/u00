@@ -44,7 +44,7 @@ function drawAppText(app) {
     let paddingY = height / 10;
 
     fontFamily = window.sFontFamily();
-    fitTextToRectangle(ctx, text, paddingX, paddingY, width - paddingX*2, height-paddingY * 2, window.sColor(), 500)
+    fitTextToRectangle(ctx, text, paddingX, paddingY, width - paddingX * 2, height - paddingY * 2, window.sColor(), 500)
 }
 
 function drawAppTextWithHeader(app) {
@@ -57,19 +57,41 @@ function drawAppTextWithHeader(app) {
     const ctx = canvas.getContext('2d');
     fillRect(ctx, 0, 0, width, height, window.sBackColor());
 
-    let area1Height = height * 0.2;
-    let area2Height = height - area1Height - 10;
-    let area3Height = 10;
+    let paddingX = width / 10;
+    let paddingY = height / 10;
 
-    let area1Offset = 0;
+    let heightWithoutPadding = height - paddingY * 2;
+
+    let area0Height = heightWithoutPadding * 0.2;
+    let area1Height = heightWithoutPadding * 0.3;
+    let area2Height = heightWithoutPadding * 0.45;
+    let area3Height = heightWithoutPadding * 0.05;
+
+    let area0Offset = paddingY;
+    let area1Offset = area0Offset + area0Height;
     let area2Offset = area1Offset + area1Height;
     let area3Offset = area2Offset + area2Height;
 
     let data = app.data;
 
-    fitTextToRectangle(ctx, data.Value1, 0, area1Offset, width, area1Height, window.sColor(), 500)
-    fitTextToRectangle(ctx, data.Value2, 0, area2Offset, width, area2Height, window.sColor(), 500)
-    fitTextToRectangle(ctx, data.Comment, 0, area3Offset, width, area3Height, window.sColor(), 500)
+    if (data.Header != null && data.Header != "") {
+        fitTextToRectangle(ctx, data.Header, paddingX, area0Offset, width - paddingX * 2, area0Height, window.sColor(), 500)
+    }
+    if (data.Value1 != null && data.Value1 != "") {
+        fitTextToRectangle(ctx, data.Value1, paddingX, area1Offset, width - paddingX * 2, area1Height, window.sColor(), 500)
+    }
+    if (data.Value2 != null && data.Value2 != "") {
+        fitTextToRectangle(ctx, data.Value2, paddingX, area2Offset, width - paddingX * 2, area2Height, window.sColor(), 500)
+    }
+    if (data.Comment != null && data.Comment != "") {
+        fitTextToRectangle(ctx, data.Comment, paddingX, area3Offset, width - paddingX * 2, area3Height, window.sColor(), 500)
+    }
+}
+
+function drawRect(ctx, x, y, width, height, strokeWidth, color) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = strokeWidth;
+    ctx.strokeRect(x, y, width, height);
 }
 
 
@@ -90,21 +112,33 @@ function fillRect(ctx, x, y, width, height, color) {
 }*/
 
 function fitTextToRectangle(ctx, text, x, y, width, height, color, maxFontSize) {
+
+    let paddingX = width * 0.02;
+    let paddingY = height * 0.05;
+
+    let tX = x + paddingX;
+    let tY = y + paddingY;
+    let tWidth = width - paddingX * 2;
+    let tHeight = height - paddingY * 2;
+
     ctx.fillStyle = color;
     let fontSize = maxFontSize;
-    ctx.font = fontSize + "px " + "Arial";
+    ctx.font = fontSize + "px " + window.sFontFamily();
     let textWidth = ctx.measureText(text).width;
     let metrics = ctx.measureText(text);
-    let textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+    let textHeight = 0;
+    textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
 
-    while ((textWidth > width || textHeight > height) && fontSize > 0) {
+    while ((textWidth > tWidth || textHeight > tHeight) && fontSize > 0) {
         fontSize -= 5;
-        ctx.font = fontSize + "px " + "Arial";
+        ctx.font = fontSize + "px " + window.sFontFamily();
         textWidth = ctx.measureText(text).width;
         metrics = ctx.measureText(text);
         textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
     }
 
-    const centerY = y + (height / 2) + (textHeight / 2);
-    ctx.fillText(text, x + (width - textWidth) / 2, centerY);
+    const centerY = tY + (tHeight / 2) + (textHeight / 2);
+    ctx.fillText(text, tX + (tWidth - textWidth) / 2, centerY - metrics.actualBoundingBoxDescent);
+
+    // drawRect(ctx, x, y, width, height, 1, color);
 }

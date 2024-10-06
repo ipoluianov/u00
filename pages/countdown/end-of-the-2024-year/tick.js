@@ -14,7 +14,7 @@ APP.tick = function () {
         v2 = ""
     }
 
-    APP.data = { Name: name, Value1: v1, Value2: v2, Comment: "until 2025-01-01 00:00:00 (local time)" };
+    APP.data = { Header: name, Value1: v1, Value2: v2, Comment: "until 2025-01-01 00:00:00 (local time)" };
 }
 
 function timeUntilDateTime(targetDateTime) {

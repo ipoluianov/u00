@@ -14,7 +14,7 @@ APP.tick = function () {
         v1 = value
         v2 = ""
     }
-    APP.data = { Name: name, Value1: v1, Value2: v2.trim(), Comment: comment };
+    APP.data = { Header: name, Value1: v1, Value2: v2.trim(), Comment: comment };
 }
 
 function timeUntilUTCDateTime(targetDateTimeUTC) {
