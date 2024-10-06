@@ -1,6 +1,6 @@
 const settingsElement = document.getElementById('settings');
 settingsElement.style.display = 'none';
-this.sSettingsHeight = 0;
+window.sSettingsHeight = 0;
 
 this.btnSettings = function () {
     if (settingsElement.style.display === 'none') {

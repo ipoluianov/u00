@@ -9,10 +9,8 @@ let appsToDraw = [];
 
 function runApp() {
     const widgets = document.querySelectorAll('.widget');
-    console.log(widgets);
     appsToDraw = [];
     widgets.forEach(element => {
-        console.log("INIT APPID:", getAttributeFromElement(element, 'app-id'));
         appsToDraw.push(getAttributeFromElement(element, 'app-id'));
     });
 }

@@ -80,14 +80,18 @@
 
     <script>
         function adjustFontSize() {
-            console.log("FULL SCREEN CNV", window.fullScreenCanvas);
             if (window.fullScreenCanvas != null && window.fullScreenCanvas != undefined) {
                 const canvas = window.fullScreenCanvas;
                 const container = document.getElementById('textParent');
-                
+
                 canvas.width = document.documentElement.clientWidth;
-                canvas.height = document.documentElement.clientHeight - 128;
-                //canvas.height = canvas.height - window.sSettingsHeight;
+
+                let h = document.documentElement.clientHeight - 128;
+                if (window.sSettingsHeight != undefined && window.sSettingsHeight != null) {
+                    h = h - window.sSettingsHeight;
+                }
+
+                canvas.height = h;
 
                 if (document.fullscreenElement != undefined && document.fullscreenElement != null) {
                     canvas.width = window.innerWidth;
