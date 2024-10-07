@@ -5,9 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/ipoluianov/gomisc/logger"
 	"github.com/ipoluianov/u00/data"
 )
 
@@ -23,6 +25,14 @@ func NewEth() *Eth {
 }
 
 func (c *Eth) Start() {
+
+	bsEndpoint, err := os.ReadFile("endpoints/eth.txt")
+	if err != nil {
+		logger.Println("Read Eth endpoint error:", err)
+	}
+
+	c.url = string(bsEndpoint)
+
 	go c.ThWork()
 }
 
