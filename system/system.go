@@ -1,33 +1,21 @@
 package system
 
-import "sync"
+import "github.com/ipoluianov/u00/blockchain/eth"
 
 type System struct {
-	mtx  sync.Mutex
-	data map[string]string
+	eth *eth.Eth
 }
 
 func NewSystem() *System {
 	var c System
-	c.data = make(map[string]string)
+	c.eth = eth.NewEth()
 	return &c
 }
 
 func (c *System) Start() {
-	go c.ThUpdateData()
+	c.eth.Start()
 }
 
 func (c *System) Stop() {
-}
-
-func (c *System) Get(key string) string {
-	c.mtx.Lock()
-	defer c.mtx.Unlock()
-	return c.data[key]
-}
-
-func (c *System) Set(key, value string) {
-	c.mtx.Lock()
-	defer c.mtx.Unlock()
-	c.data[key] = value
+	c.eth.Stop()
 }

@@ -26,6 +26,29 @@ function appDraw() {
     });
 }
 
+function updateAppData() {
+    appsToDraw.forEach(appId => {
+        let app = window[appId];
+        if (app !== null && app !== undefined) {
+            let el = document.getElementById(appId+"_cnv");
+            let dataSource = getAttributeFromElement(el, 'data-source');
+            if (dataSource === null || dataSource === undefined || dataSource === "") {
+                return;
+            }
+            console.log("updateAppData", dataSource);
+            fetch(dataSource)
+            .then(response => response.json())
+            .then(data => {
+                console.log("updateAppData", data);
+                app.data = data;
+            });
+        }
+    });
+}
+
+updateAppData();
+setInterval(updateAppData, 300);
+
 /////////////////////////////////////////////
 
 function drawAppText(app) {

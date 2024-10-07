@@ -24,7 +24,7 @@ func (c *System) GetPage(path string) (page common.Page, err error) {
 
 	pageScript := `
 <div id="textParent" style="width: 100%; height: 100%;overflow: hidden;">
-	<canvas id="APP_cnv" app-id="APP" class="widget" style="display: block; box-sizing: border-box;"></canvas>
+	<canvas id="APP_cnv" app-id="APP" data-source="DATA_SOURCE" class="widget" style="display: block; box-sizing: border-box;"></canvas>
 </div>
 <script>
 	APP = {};		
@@ -43,6 +43,7 @@ func (c *System) GetPage(path string) (page common.Page, err error) {
 
 	itemHtml := pageScript
 
+	itemHtml = strings.ReplaceAll(itemHtml, "DATA_SOURCE", p.DataSource)
 	itemHtml = strings.ReplaceAll(itemHtml, "APP_CODE", p.TickScript)
 	itemHtml = strings.ReplaceAll(itemHtml, "APP", ""+appId)
 
@@ -85,7 +86,7 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 			<a href="%URL%" class="card_unit_link">
 				<div class="card_content">
 					<div class="card_content_img">
-		                <canvas id="APP_CNV" app-id="APP" class="widget" style="display: block; box-sizing: border-box; width:340px; height:190px;">
+		                <canvas id="APP_CNV" app-id="APP" data-source="DATA_SOURCE" class="widget" style="display: block; box-sizing: border-box; width:340px; height:190px;">
                 		</canvas>
 						<script>
 							APP = {};
@@ -128,6 +129,7 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 		itemHtml = strings.ReplaceAll(itemHtml, "%TEXT%", p.Title)
 		itemHtml = strings.ReplaceAll(itemHtml, "%DESCRIPTION%", "")
 
+		itemHtml = strings.ReplaceAll(itemHtml, "DATA_SOURCE", p.DataSource)
 		itemHtml = strings.ReplaceAll(itemHtml, "APP_CNV", appId+"_cnv")
 		itemHtml = strings.ReplaceAll(itemHtml, "APP_CODE", p.TickScript)
 		itemHtml = strings.ReplaceAll(itemHtml, "APP", appId)

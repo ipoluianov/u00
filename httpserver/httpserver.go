@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/ipoluianov/gomisc/logger"
+	"github.com/ipoluianov/u00/data"
 	"github.com/ipoluianov/u00/static"
 	"github.com/ipoluianov/u00/system"
 	"github.com/ipoluianov/u00/utils"
@@ -160,7 +161,7 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if path == "data" {
 		if len(parts) > 1 {
-			bs := c.s.Get(parts[1])
+			bs := data.DATA.Get(parts[1])
 			w.Write([]byte(bs))
 		}
 		return

@@ -8,4 +8,5 @@ type Page struct {
 	BottomText  string `json:"bottom_text"`
 	PageScript  string `json:"page_script"`
 	TickScript  string `json:"tick_script"`
+	DataSource  string `json:"data_source"`
 }
