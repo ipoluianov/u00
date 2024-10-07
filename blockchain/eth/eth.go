@@ -44,14 +44,14 @@ func (c *Eth) ThWork() {
 	var err error
 	c.client, err = ethclient.Dial(c.url)
 	if err != nil {
-		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+		logger.Println("Failed to connect to the Ethereum client:", err)
 	}
 
 	for {
 		time.Sleep(1 * time.Second)
 		blockNumber, err := c.getLatestBlockNumber()
 		if err != nil {
-			fmt.Println("error:", err)
+			logger.Println("error:", err)
 			continue
 		}
 
