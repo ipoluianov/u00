@@ -49,7 +49,7 @@ func (c *Eth) ThWork() {
 	}
 
 	for {
-		time.Sleep(1 * time.Second)
+		time.Sleep(3 * time.Second)
 		blockNumber, err := c.getLatestBlockNumber()
 		if err != nil {
 			logger.Println("error:", err)
