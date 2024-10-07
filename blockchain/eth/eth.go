@@ -45,6 +45,7 @@ func (c *Eth) ThWork() {
 	c.client, err = ethclient.Dial(c.url)
 	if err != nil {
 		logger.Println("Failed to connect to the Ethereum client:", err)
+		return
 	}
 
 	for {
