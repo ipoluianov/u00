@@ -29,6 +29,7 @@ func (c *Eth) Start() {
 	bsEndpoint, err := os.ReadFile("endpoints/eth.txt")
 	if err != nil {
 		logger.Println("Read Eth endpoint error:", err)
+		return
 	}
 
 	c.url = string(bsEndpoint)
