@@ -107,8 +107,8 @@ func (c *System) GetPageIndex() (page common.Page, err error) {
 
 	folders, _ := findPageTxt("pages")
 	page.PageScript += `<div style="display: block;"> <div class="card_container">`
-	for _, folder := range folders {
-		appId := "app_" + fmt.Sprint(time.Now().UnixMicro())
+	for folderIndex, folder := range folders {
+		appId := "app_" + fmt.Sprint(time.Now().UnixMicro()) + "_" + fmt.Sprint(folderIndex)
 		name := strings.ReplaceAll(folder, "pages/", "") // POSIX
 		name = strings.ReplaceAll(name, "pages\\", "")   // Win
 		p, _ := pages.Get(name)
