@@ -1,7 +1,0 @@
-title:         Ethereum latest block number
-keywords:      eth, latest, block, number
-description:   Ethereum current block number
-bottom_text:   
-content_text:  
-view:          viewheadertext
-datasource:    /data/eth-block-number

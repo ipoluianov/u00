@@ -30,18 +30,18 @@ function updateAppData() {
     appsToDraw.forEach(appId => {
         let app = window[appId];
         if (app !== null && app !== undefined) {
-            let el = document.getElementById(appId+"_cnv");
+            let el = document.getElementById(appId + "_cnv");
             let dataSource = getAttributeFromElement(el, 'data-source');
             if (dataSource === null || dataSource === undefined || dataSource === "") {
                 return;
             }
-            console.log("updateAppData", dataSource);
+            //console.log("updateAppData", dataSource);
             fetch(dataSource)
-            .then(response => response.json())
-            .then(data => {
-                console.log("updateAppData", data);
-                app.data = data;
-            });
+                .then(response => response.json())
+                .then(data => {
+                    //console.log("updateAppData", data);
+                    app.data = data;
+                });
         }
     });
 }
@@ -66,6 +66,63 @@ function drawAppText(app) {
 
     fontFamily = window.sFontFamily();
     fitTextToRectangle(ctx, text, paddingX, paddingY, width - paddingX * 2, height - paddingY * 2, window.sColor(), 500)
+}
+
+function drawResultTable(app) {
+    const canvas = document.getElementById(app.id + "_cnv");
+    let width = 1920;
+    let height = 1080;
+
+    const ctx = canvas.getContext('2d');
+    ctx.save();
+
+    const expectedWidth = 1920;
+    const expectedHeight = 1080;
+
+    const scale = Math.min(canvas.width / expectedWidth, canvas.height / expectedHeight);
+    const offsetX = (canvas.width - expectedWidth * scale) / 2;
+    const offsetY = (canvas.height - expectedHeight * scale) / 2;    
+    ctx.translate(offsetX, offsetY);
+    ctx.scale(scale, scale);
+
+    fillRect(ctx, 0, 0, width, height, window.sBackColor());
+    // drawRect(ctx, 0, 0, width, height, 5, '#F00');
+
+    fontFamily = window.sFontFamily();
+
+    if (app.data.Table == undefined || app.data.Table == null) {
+        drawText(ctx, "loading ...", 0, 0, width, height, window.sColor(), 48, "center");
+        ctx.restore();
+        return;
+    }
+
+
+    drawText(ctx, app.data.Code, 0, 0, width, 200, window.sColor(), 48, "center");
+
+    if (app.data.Table.Columns.length >= 2) {
+
+        let itemHeight = (height - 200) / app.data.Table.Items.length;
+        let offset = 200;
+        let columnWidth = width / 2;
+
+
+        for (let rowIndex in app.data.Table.Items) {
+            let row = app.data.Table.Items[rowIndex];
+            if (row.Values.length < 2) {
+                continue;
+            }
+            let itemName = row.Values[0];
+            let itemValue = row.Values[1];
+
+            drawText(ctx, itemName, 0, offset, columnWidth, itemHeight, window.sColor(), 70, "right")
+            drawText(ctx, itemValue, columnWidth, offset, columnWidth, itemHeight, window.sColor(), 70, "left")
+
+            offset += itemHeight;
+        }
+    }
+
+    ctx.restore();
+
 }
 
 function drawAppTextWithHeader(app) {
@@ -132,7 +189,7 @@ function fillRect(ctx, x, y, width, height, color) {
     ctx.fillText(text, x, y + fontSize);
 }*/
 
-function fitTextToRectangle(ctx, text, x, y, width, height, color, maxFontSize) {
+function fitTextToRectangle(ctx, text, x, y, width, height, color, maxFontSize, align) {
 
     let paddingX = width * 0.02;
     let paddingY = height * 0.05;
@@ -159,7 +216,49 @@ function fitTextToRectangle(ctx, text, x, y, width, height, color, maxFontSize) 
     }
 
     const centerY = tY + (tHeight / 2) + (textHeight / 2);
-    ctx.fillText(text, tX + (tWidth - textWidth) / 2, centerY - metrics.actualBoundingBoxDescent);
+
+    if (align == "right") {
+        ctx.fillText(text, (tWidth - textWidth), centerY - metrics.actualBoundingBoxDescent);
+    } else {
+        if (align == "left") {
+            ctx.fillText(text, tX, centerY - metrics.actualBoundingBoxDescent);
+        } else {
+            ctx.fillText(text, tX + (tWidth - textWidth) / 2, centerY - metrics.actualBoundingBoxDescent);
+        }
+    }
+
+
 
     // drawRect(ctx, x, y, width, height, 1, color);
+}
+
+function drawText(ctx, text, x, y, width, height, color, fontSize, align) {
+
+    let paddingX = width * 0.02;
+    let paddingY = height * 0.05;
+
+    let tX = x + paddingX;
+    let tY = y + paddingY;
+    let tWidth = width - paddingX * 2;
+    let tHeight = height - paddingY * 2;
+
+    ctx.fillStyle = color;
+    ctx.font = fontSize + "px " + window.sFontFamily();
+    let metrics = ctx.measureText(text);
+    let textHeight = 0;
+    textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+    let textWidth = ctx.measureText(text).width;
+
+    const centerY = tY + (tHeight / 2) + (textHeight / 2);
+
+    if (align == "right") {
+        ctx.fillText(text, (tWidth - textWidth), centerY - metrics.actualBoundingBoxDescent);
+    } else {
+        if (align == "left") {
+            ctx.fillText(text, tX, centerY - metrics.actualBoundingBoxDescent);
+        } else {
+            ctx.fillText(text, tX + (tWidth - textWidth) / 2, centerY - metrics.actualBoundingBoxDescent);
+        }
+    }
+    //drawRect(ctx, x, y, width, height, 1, color);
 }
