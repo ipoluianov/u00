@@ -114,8 +114,8 @@ function drawResultTable(app) {
             let itemName = row.Values[0];
             let itemValue = row.Values[1];
 
-            drawText(ctx, itemName, 0, offset, columnWidth, itemHeight, window.sColor(), 70, "right")
-            drawText(ctx, itemValue, columnWidth, offset, columnWidth, itemHeight, window.sColor(), 70, "left")
+            drawText(ctx, itemName, 0, offset, columnWidth, itemHeight, window.sColor(), 48, "right")
+            drawText(ctx, itemValue, columnWidth, offset, columnWidth, itemHeight, window.sColor(), 48, "left")
 
             offset += itemHeight;
         }
