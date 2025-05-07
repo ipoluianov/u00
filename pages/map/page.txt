@@ -1,0 +1,7 @@
+title:         Map
+keywords:      map
+description:   Map data
+bottom_text:   
+content_text:  
+view:          viewtext
+datasource:    https://map.u00.io/get/t

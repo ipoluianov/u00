@@ -37,10 +37,11 @@ function updateAppData() {
             }
             //console.log("updateAppData", dataSource);
             fetch(dataSource)
-                .then(response => response.json())
+                .then(response => response.text())
                 .then(data => {
                     //console.log("updateAppData", data);
-                    app.data = data;
+                    app.data_value = data;
+                    console.log("updateAppData", app.data_value);
                 });
         }
     });
