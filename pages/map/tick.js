@@ -3,6 +3,7 @@ APP.draw = function (elId) {
 }
 
 APP.wakeLocked = false;
+APP.wakeLockObject = null;
 
 APP.wakeLock = async function () {
     if (APP.wakeLocked) {
@@ -10,8 +11,8 @@ APP.wakeLock = async function () {
         return;
     }
     try {
-        wakeLock = await navigator.wakeLock.request('screen');
-        wakeLock.addEventListener('release', () => {
+        APP.wakeLockObject = await navigator.wakeLock.request('screen');
+        APP.wakeLockObject.addEventListener('release', () => {
             console.log('Screen Wake Lock was released');
         });
         console.log('Screen Wake Lock is active');
