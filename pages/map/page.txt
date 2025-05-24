@@ -4,4 +4,4 @@ description:   Map data
 bottom_text:   
 content_text:  
 view:          viewtext
-datasource:    https://map.u00.io/get/t
+datasource:    https://map.u00.io/get/0xc79406f6359fcb196d744eec2783df8184b570f0f8634736db5fd649a92a683c
