@@ -193,6 +193,11 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if len(parts) == 1 && parts[0] == "set" {
+		c.file(w, r, "/public/set/index.html")
+		return
+	}
+
 	page, err := c.s.GetPage(pagePath)
 	if err != nil {
 		w.WriteHeader(404)

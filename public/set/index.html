@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Item</title>
+    <link rel="stylesheet" href="/public/set/style.css">
+    <script src="/public/js/nacl.min.js"></script>
+    <script src="/public/set/script.js" defer></script>
+
+<script>
+    window.sodium = {
+        onload: function (sodium) {
+            let h = sodium.crypto_generichash(64, sodium.from_string('test'));
+            console.log(sodium.to_hex(h));
+        }
+    };
+</script>
+
+</head>
+
+<body style="background-color: black;">
+    <div>
+        <div id="privateKey"></div>
+        <div id="publicKey"></div>
+    </div>
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+            <input type="text" id="itemValue" placeholder="Enter item value" style="width: 100%; height: 200px; padding: 10px; font-size: 16px; box-sizing: border-box;" />
+            <button id="setItemButton" style="width: 200px; padding: 10px; font-size: 16px; margin-top: 10px;" onclick="setItemValueFromInput()">Set Item</button>
+            <button id="setItemButton" style="width: 200px; padding: 10px; font-size: 16px; margin-top: 10px;" onclick="openItem()">Open Item</button>
+        </div>
+    </div>
+    <div id="linkToView"></div>
+</body>
+
+</html>
