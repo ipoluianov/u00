@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-28YBM2Y63F"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-28YBM2Y63F');
+    </script>
+
+    <title>%TITLE%</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <meta name="description" content="%DESCRIPTION%">
+    <meta name="keywords" content="%KEYWORDS%">
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/cards.css">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/qrcode.min.js"></script>
+</head>
+
+<body id="lightThemeContainer">
+    <script>
+        loadColorTheme();
+    </script>
+    <div style="display: flex;flex-direction: column;" id="fullHeightElement">
+        <div id="pageHeader">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <a class="header" href="/">
+                    <div
+                        style="width: 64px;height: 64px;display: flex; justify-content: center; align-items: center; text-decoration: none;">
+                        <img src="/public/icons/logo64.png" />
+                    </div>
+                </a>
+            </div>
+            <div style="padding: 10px; display: flex; justify-content: center; align-items: center;">
+                %PAGE_HEADER%</div>
+            <div style="width: 70px; padding: 10px; display: flex; justify-content: center; align-items: center;">
+                <button onclick="btnInvertColors()" class="bottomButtons" style="font-size: 32pt;"><img
+                        class="bottomButtonImage" src="/public/icons/invert-colors.png" /></button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        %CONTENT%
+    </div>
+
+    <div class="contentTextContainer">
+        <div class="contentText">
+            %CONTENT_TEXT%
+        </div>
+    </div>
+    
+    <script>
+        %SCRIPT%
+    </script>
+</body>
+
+</html>

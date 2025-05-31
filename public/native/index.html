@@ -1,50 +1,34 @@
-<html>
+<div style="max-width: 800px; margin: 0 auto;">
+    <div>
+        <div id="itemDisplayName" style="text-align: center; font-size: 24pt;"></div>
+    </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Native Item View</title>
-    <link rel="stylesheet" href="/public/native/style.css">
-    <script src="/public/native/script.js" defer></script>
-    <script src="/public/js/qrcode.min.js"></script>
-</head>
-
-<body style="background-color: black;">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <div style="background-color: #222222; color: #EEEEEE;">
-            <div id="itemDisplayName" style="text-align: center; color: #EEEEEE; font-size: 24pt;"></div>
-        </div>
-
-        <div style="background-color: #111;">
-            <div id="itemDateTime" style="color: #888888; text-align: center;"></div>
-            <div id="itemValue"
-                style="color: #EEEEEE;text-align: center;min-height: 200px; display:flex;align-items: center;justify-content: center;text-align: center;word-break: break-all;">
-            </div>
-        </div>
-
-        <div style="color: #222222; font-size: 8pt; text-align: center;">
-            <pre id="itemSignature"></pre>
-        </div>
-        <div style="color: #222222; font-size: 12pt; text-align: center;">
-            <div id="itemAddress" style="text-align: center; color: #888888;font-size: 8pt;"></div>
-            <div>Last Update Time</div>
-            <div id="itemLastUpdateTime"></div>
+    <div>
+        <div id="itemDateTime" style="text-align: center;"></div>
+        <div id="itemValue"
+            style="text-align: center;min-height: 200px; display:flex;align-items: center;justify-content: center;text-align: center;word-break: break-all;">
         </div>
     </div>
-    <div style="display:flex;align-items: center;justify-content: center;text-align: center;margin-top: 40px;">
-        <div id="qrcode"></div>
-        <script type="text/javascript">
-            //new QRCode(document.getElementById("qrcode"), window.location.href);
-            var qrcode = new QRCode("qrcode", {
-                text: window.location.href,
-                width: 256,
-                height: 256,
-                colorDark: "#000000",
-                colorLight: "#EEEEEE",
-                correctLevel: QRCode.CorrectLevel.H,
-            });            
-        </script>
-    </div>
-</body>
 
-</html>
+    <div style="font-size: 8pt; text-align: center;">
+        <pre id="itemSignature"></pre>
+    </div>
+    <div style="font-size: 12pt; text-align: center;">
+        <div id="itemAddress" style="text-align: center; font-size: 8pt;"></div>
+        <div>Last Update Time</div>
+        <div id="itemLastUpdateTime"></div>
+    </div>
+</div>
+<div style="display:flex;align-items: center;justify-content: center;text-align: center;margin-top: 40px;">
+    <div id="qrcode" style="border: 2px solid #888888;padding: 10px;"></div>
+    <script type="text/javascript">
+        var qrcode = new QRCode("qrcode", {
+            text: window.location.href,
+            width: 256,
+            height: 256,
+            colorDark: "#000000",
+            colorLight: "#888888",
+            correctLevel: QRCode.CorrectLevel.H,
+        });            
+    </script>
+</div>

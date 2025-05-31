@@ -180,7 +180,7 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(pagePath) == 0 {
-		c.file(w, r, "/public/home/index.html")
+		c.processTemplate(w, "/public/home/index.html", "/public/home/script.js")
 		return
 	}
 
@@ -190,7 +190,8 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(parts) == 2 && parts[0] == "native" {
-		c.file(w, r, "/public/native/index.html")
+		//c.file(w, r, "/public/native/index.html")
+		c.processTemplate(w, "/public/native/index.html", "/public/native/script.js")
 		return
 	}
 
@@ -218,6 +219,41 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	tmp = strings.ReplaceAll(tmp, "%CONTENT_TEXT%", string(page.ContentText))
 	tmp = strings.ReplaceAll(tmp, "%BOTTOM_TEXT%", string(page.BottomText))
+
+	w.Write([]byte(tmp))
+}
+
+func (c *HttpServer) processTemplate(w http.ResponseWriter, htmlFile string, jsFile string) {
+	htmlFileContent, err := os.ReadFile(logger.CurrentExePath() + htmlFile)
+	if err != nil {
+		htmlFileContent = nil
+	}
+
+	jsFileContent, err := os.ReadFile(logger.CurrentExePath() + jsFile)
+	if err != nil {
+		jsFileContent = nil
+	}
+
+	title := "Full Screen - Live Update"
+	tmp := ""
+	bsTmp, err := os.ReadFile(logger.CurrentExePath() + "/public/template.html")
+	if err != nil {
+		logger.Println("Error reading template file:", err)
+		w.WriteHeader(404)
+		w.Write([]byte("not found"))
+		return
+	}
+	tmp = string(bsTmp)
+	tmp = strings.ReplaceAll(tmp, "%TITLE%", title)
+	tmp = strings.ReplaceAll(tmp, "%PAGE_HEADER%", title)
+	tmp = strings.ReplaceAll(tmp, "%DESCRIPTION%", title+" - watch in full screen.")
+	tmp = strings.ReplaceAll(tmp, "%KEYWORDS%", "fullscreen, full, screen")
+
+	tmp = strings.ReplaceAll(tmp, "%CONTENT%", string(htmlFileContent))
+	tmp = strings.ReplaceAll(tmp, "%SCRIPT%", string(jsFileContent))
+
+	tmp = strings.ReplaceAll(tmp, "%CONTENT_TEXT%", "")
+	tmp = strings.ReplaceAll(tmp, "%BOTTOM_TEXT%", "")
 
 	w.Write([]byte(tmp))
 }
