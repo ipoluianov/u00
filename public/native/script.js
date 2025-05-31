@@ -1,4 +1,3 @@
-console.log("native script loaded");
 
 function getItemIdFromUrl() {
     const urlParts = window.location.pathname.split('/');

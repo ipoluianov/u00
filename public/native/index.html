@@ -6,6 +6,7 @@
     <title>Native Item View</title>
     <link rel="stylesheet" href="/public/native/style.css">
     <script src="/public/native/script.js" defer></script>
+    <script src="/public/js/qrcode.min.js"></script>
 </head>
 
 <body style="background-color: black;">
@@ -16,7 +17,9 @@
 
         <div style="background-color: #111;">
             <div id="itemDateTime" style="color: #888888; text-align: center;"></div>
-            <div id="itemValue" style="color: #EEEEEE;text-align: center;min-height: 200px; display:flex;align-items: center;justify-content: center;text-align: center;"></div>
+            <div id="itemValue"
+                style="color: #EEEEEE;text-align: center;min-height: 200px; display:flex;align-items: center;justify-content: center;text-align: center;">
+            </div>
         </div>
 
         <div style="color: #222222; font-size: 8pt; text-align: center;">
@@ -27,6 +30,20 @@
             <div>Last Update Time</div>
             <div id="itemLastUpdateTime"></div>
         </div>
+    </div>
+    <div style="display:flex;align-items: center;justify-content: center;text-align: center;margin-top: 40px;">
+        <div id="qrcode"></div>
+        <script type="text/javascript">
+            //new QRCode(document.getElementById("qrcode"), window.location.href);
+            var qrcode = new QRCode("qrcode", {
+                text: window.location.href,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#EEEEEE",
+                correctLevel: QRCode.CorrectLevel.H,
+            });            
+        </script>
     </div>
 </body>
 
