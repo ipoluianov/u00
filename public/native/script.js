@@ -33,7 +33,7 @@ function formatSignature(signature) {
     if (signature.length !== 128) {
         return "";
     }
-    return `${signature.slice(0, 16)}\r\n${signature.slice(16, 32)}\r\n${signature.slice(32, 48)}\r\n${signature.slice(48, 64)}`;
+    return `SIGNATURE ED25519\r\n${signature.slice(0, 16)}\r\n${signature.slice(16, 32)}\r\n${signature.slice(32, 48)}\r\n${signature.slice(48, 64)}`;
 }
 
 function formatItemAddress(itemAddress) {
@@ -60,7 +60,7 @@ async function updateItem() {
     var itemAddressElement = document.getElementById("itemAddress");
 
     var itemDisplayName = ""
-    var itemDisplayNameElement = document.getElementById("itemDisplayName");
+    var itemDisplayNameElement = document.getElementById("titleElement");
 
     var itemValue = ""
     var itemValueElement = document.getElementById("itemValue");
