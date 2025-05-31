@@ -1,0 +1,7 @@
+title:         Dashboard
+keywords:      dashboard
+description:   Dashboard
+bottom_text:   
+content_text:  
+view:          viewtext
+datasource:    https://map.u00.io/get/no-item

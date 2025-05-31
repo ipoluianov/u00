@@ -183,6 +183,16 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		pagePath = "index"
 	}
 
+	if len(parts) == 2 && parts[0] == "dashboard" {
+		c.file(w, r, "/public/dashboard/dashboard.html")
+		return
+	}
+
+	if len(parts) == 2 && parts[0] == "native" {
+		c.file(w, r, "/public/native/index.html")
+		return
+	}
+
 	page, err := c.s.GetPage(pagePath)
 	if err != nil {
 		w.WriteHeader(404)
