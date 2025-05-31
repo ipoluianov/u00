@@ -73,8 +73,6 @@ async function updateItem() {
     var itemSignatureFormatted = "";
     var itemSignatureElement = document.getElementById("itemSignature");
 
-    itemAddressElement.textContent = itemAddress;
-
     valueFromServer = await updateItemValue(itemAddress);
     if (valueFromServer != "") {
         var jsonValue = await JSON.parse(valueFromServer);
