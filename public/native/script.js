@@ -37,6 +37,17 @@ function formatSignature(signature) {
     return `${signature.slice(0, 16)}\r\n${signature.slice(16, 32)}\r\n${signature.slice(32, 48)}\r\n${signature.slice(48, 64)}`;
 }
 
+function formatItemAddress(itemAddress) {
+    // 0x1234....5678
+    if (itemAddress.startsWith("0x")) {
+        itemAddress = itemAddress.slice(2);
+    }
+    if (itemAddress.length !== 64) {
+        return "";
+    }
+    return `0x${itemAddress.slice(0, 4)}...${itemAddress.slice(-4)}`;
+}
+
 var updating = false;
 
 async function updateItem() {
@@ -79,6 +90,8 @@ async function updateItem() {
         itemDateTime = "-";
         itemSignatureFormatted = "No signature";
     }
+
+    itemAddressElement.textContent = formatItemAddress(itemAddress);
 
     itemValueElement.textContent = itemValue;
     itemDisplayNameElement.textContent = itemDisplayName;
