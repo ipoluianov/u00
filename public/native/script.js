@@ -48,10 +48,10 @@ async function updateItem() {
 
     var itemAddress = getItemIdFromUrl();
     var itemAddressElement = document.getElementById("itemAddress");
-    
+
     var itemDisplayName = ""
     var itemDisplayNameElement = document.getElementById("itemDisplayName");
-    
+
     var itemValue = ""
     var itemValueElement = document.getElementById("itemValue");
 
@@ -61,11 +61,10 @@ async function updateItem() {
     var itemSignature = "";
     var itemSignatureFormatted = "";
     var itemSignatureElement = document.getElementById("itemSignature");
-    itemSignatureFormatted = formatSignature(itemSignature);
 
     itemAddressElement.textContent = itemAddress;
 
-    valueFromServer =  await updateItemValue(itemAddress);
+    valueFromServer = await updateItemValue(itemAddress);
     if (valueFromServer != "") {
         var jsonValue = await JSON.parse(valueFromServer);
         itemValue = jsonValue.v;
@@ -73,6 +72,7 @@ async function updateItem() {
         itemDisplayName = jsonValue.d;
         itemDateTime = jsonValue.t;
         itemSignature = jsonValue.s;
+        itemSignatureFormatted = formatSignature(itemSignature);
     } else {
         itemValue = "No data found";
         itemDisplayName = "No dispay name";
