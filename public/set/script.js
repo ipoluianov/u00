@@ -71,7 +71,7 @@ async function setItemValue(value) {
 
     console.log("Item to set:", item);
     itemAsString = JSON.stringify(item);
-    itemAsHexString = Buffer.from(itemAsString).toString('hex');
+    var itemAsHexString = new TextEncoder().encode(itemAsString).reduce((hex, byte) => hex + byte.toString(16).padStart(2, '0'), '');
 
     const response = await fetch("https://map.u00.io/set-json-hex/" + itemAsHexString, {
         method: "GET",
