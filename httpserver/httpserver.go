@@ -180,7 +180,8 @@ func (c *HttpServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(pagePath) == 0 {
-		pagePath = "index"
+		c.file(w, r, "/public/home/index.html")
+		return
 	}
 
 	if len(parts) == 2 && parts[0] == "dashboard" {

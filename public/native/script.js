@@ -105,3 +105,4 @@ async function updateItem() {
 }
 
 setInterval(() => { updateItem(); }, 1000);
+updateItem();
