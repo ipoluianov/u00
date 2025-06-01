@@ -17,7 +17,17 @@ async function updateItemValue(itemId) {
     try {
         var response = await fetch(`https://map.u00.io/get/${itemId}`);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            var displayName = "Error"
+            if (response.status === 429) {
+                displayName = "Too many requests";
+            }
+            result = JSON.stringify({
+                v: "",
+                d: displayName,
+                t: "-",
+                s: "No signature"
+            });
+            return result;
         }
         result = await response.text();
     } catch (error) {
