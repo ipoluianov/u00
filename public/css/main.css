@@ -187,3 +187,14 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background-color: #888;
 }
+
+
+#valueArea {
+  min-height: calc(80vh - 50px);
+}
+
+@supports (height: 100dvh) {
+  #valueArea {
+    min-height: calc(80dvh - 50px);
+  }
+}
