@@ -114,5 +114,5 @@ async function updateItem() {
     updating = false;
 }
 
-setInterval(() => { updateItem(); }, 100);
+setInterval(() => { updateItem(); }, 1000);
 updateItem();
