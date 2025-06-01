@@ -46,7 +46,7 @@ function loadColorTheme() {
 }
 
 function btnFullscreen() {
-    const elem = document.getElementById("viewDiv");
+    const elem = document.getElementById("valueArea");
 
     if (!document.fullscreenElement) {
         elem.requestFullscreen().catch(err => {

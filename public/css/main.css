@@ -190,11 +190,11 @@ html {
 
 
 #valueArea {
-  min-height: calc(80vh - 50px);
+  min-height: calc(100vh - 140px);
 }
 
 @supports (height: 100dvh) {
   #valueArea {
-    min-height: calc(80dvh - 50px);
+    min-height: calc(100dvh - 140px);
   }
 }
