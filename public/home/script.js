@@ -10,6 +10,7 @@ function formatItemAddress(itemAddress) {
 }
 
 async function loadItems(domain) {
+    console.log("Loading items for domain:", domain);
     try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 1000);
@@ -29,13 +30,15 @@ async function loadItems(domain) {
         }
         const items = await response.json();
         const itemsList = document.getElementById("listOfItems");
+        const itemDivHeader = document.createElement("div");
+        itemDivHeader.innerHTML = `<h2>Domain ${domain.toUpperCase()}</h2>`;
+        itemsList.appendChild(itemDivHeader);
         //itemsList.innerHTML = ""; // Clear existing items
         items.forEach(id => {
             // <div><a href="/native/{id}"></s></div>
             var formattedItemAddress = formatItemAddress(id);
             const itemDiv = document.createElement("div");
             itemDiv.innerHTML = `
-        <div>Domain: ${domain}</div>
         <a href="/native/${id}">
             <div style='border: 1px solid #ccc;'>
                 <div id='itemName_${id}'></div>
