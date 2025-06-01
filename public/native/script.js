@@ -22,7 +22,7 @@ async function updateItemValue(itemId) {
                 displayName = "Too many requests";
             }
             result = JSON.stringify({
-                v: "",
+                v: displayName,
                 d: displayName,
                 t: "-",
                 s: "No signature"
