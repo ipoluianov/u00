@@ -12,16 +12,35 @@ function getItemIdFromUrl() {
     return null;
 }
 
-async function updateItemValue(itemId) {
+async function updateItemValue(itemId, domain) {
     // function returns byte array
+
+    if (itemId === null || itemId === undefined) {
+        console.error("Item ID is null or undefined.");
+        return null;
+    }
+
+    if (itemId.length !== 66 || !itemId.startsWith("0x")) {
+        console.error("Invalid item ID format. Expected format: 0x followed by 64 hex characters.");
+        return null;
+    }
+
+    /*var domain = itemId.slice(2, 3);
+    console.log("Domain:", domain);*/
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1000);
+
+
     var result = {};
     try {
-        var response = await fetch(`https://map.u00.io/get/${itemId}`);
+        var response = await fetch(`https://s${domain}.u00.io/get/${itemId}`, {
+            signal: controller.signal
+        });
+        clearTimeout(timeout);
         if (!response.ok) {
             return result;
         }
-        /*result = await response.bytes();*/
-        
 
         const blob = await response.blob();
         const arrayBuffer = await blob.arrayBuffer();
@@ -86,8 +105,67 @@ async function updateItem() {
     var itemDateTime = "";
     var itemDateTimeElement = document.getElementById("itemDateTime");
 
+    var domain1 = itemAddress.slice(2, 3);
+    var domain2 = domain1
+    // domain2 = 0->1 ... 9->a ..... f->0
+    if (domain1 === "0") {
+        domain2 = "1";
+    }
+    if (domain1 === "1") {
+        domain2 = "2";
+    }
+    if (domain1 === "2") {
+        domain2 = "3";
+    }
+    if (domain1 === "3") {
+        domain2 = "4";
+    }
+    if (domain1 === "4") {
+        domain2 = "5";
+    }
+    if (domain1 === "5") {
+        domain2 = "6";
+    }
+    if (domain1 === "6") {
+        domain2 = "7";
+    }
+    if (domain1 === "7") {
+        domain2 = "8";
+    }
+    if (domain1 === "8") {
+        domain2 = "9";
+    }
+    if (domain1 === "9") {
+        domain2 = "a";
+    }
+    if (domain1 === "a") {
+        domain2 = "b";
+    }
+    if (domain1 === "b") {
+        domain2 = "c";
+    }
+    if (domain1 === "c") {
+        domain2 = "d";
+    }
+    if (domain1 === "d") {
+        domain2 = "e";
+    }
+    if (domain1 === "e") {
+        domain2 = "f";
+    }
+    if (domain1 === "f") {
+        domain2 = "0";
+    }
 
-    var valueFromServer = await updateItemValue(itemAddress);
+    var valueFromServer1 = await updateItemValue(itemAddress, domain1);
+    var valueFromServer2 = await updateItemValue(itemAddress, domain2);
+    var valueFromServer = null;
+    if (valueFromServer1 != null && valueFromServer1 != undefined) {
+        valueFromServer = valueFromServer1;
+    }
+    if (valueFromServer2 != null && valueFromServer2 != undefined) {
+        valueFromServer = valueFromServer2;
+    }
 
     if (valueFromServer != null && valueFromServer != undefined) {
         var jsonValue = valueFromServer;
