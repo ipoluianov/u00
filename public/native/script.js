@@ -13,37 +13,42 @@ function getItemIdFromUrl() {
 }
 
 async function updateItemValue(itemId) {
-    var result = "";
+    // function returns byte array
+    var result = {};
     try {
         var response = await fetch(`https://map.u00.io/get/${itemId}`);
         if (!response.ok) {
-            var displayName = "Error"
-            if (response.status === 429) {
-                displayName = "Too many requests";
-            }
-            result = JSON.stringify({
-                v: displayName,
-                d: displayName,
-                t: "-",
-                s: "No signature"
-            });
             return result;
         }
-        result = await response.text();
+        /*result = await response.bytes();*/
+        
+
+        const blob = await response.blob();
+        const arrayBuffer = await blob.arrayBuffer();
+        const zip = await JSZip.loadAsync(arrayBuffer);
+
+        for (const filename of Object.keys(zip.files)) {
+            const file = zip.files[filename];
+            if (!file.dir) {
+                if (filename === "time") {
+                    const content = await file.async("string");
+                    result.t = content;
+                }
+                if (filename === "value") {
+                    const content = await file.async("string");
+                    result.v = content;
+                }
+                if (filename === "name") {
+                    const content = await file.async("string");
+                    result.d = content;
+                }
+            }
+        }
     } catch (error) {
         console.error("Error fetching item value:", error);
+        result = null;
     }
     return result;
-}
-
-function formatSignature(signature) {
-    if (signature.startsWith("0x")) {
-        signature = signature.slice(2);
-    }
-    if (signature.length !== 128) {
-        return "";
-    }
-    return `SIGNATURE ED25519\r\n${signature.slice(0, 16)}\r\n${signature.slice(16, 32)}\r\n${signature.slice(32, 48)}\r\n${signature.slice(48, 64)}`;
 }
 
 function formatItemAddress(itemAddress) {
@@ -69,6 +74,9 @@ async function updateItem() {
     var itemAddress = getItemIdFromUrl();
     var itemAddressElement = document.getElementById("itemAddress");
 
+    var itemAddress = getItemIdFromUrl();
+    var itemAddressElement = document.getElementById("itemAddress");
+
     var itemDisplayName = ""
     var itemDisplayNameElement = document.getElementById("titleElement");
 
@@ -78,24 +86,19 @@ async function updateItem() {
     var itemDateTime = "";
     var itemDateTimeElement = document.getElementById("itemDateTime");
 
-    var itemSignature = "";
-    var itemSignatureFormatted = "";
-    var itemSignatureElement = document.getElementById("itemSignature");
 
-    valueFromServer = await updateItemValue(itemAddress);
-    if (valueFromServer != "") {
-        var jsonValue = await JSON.parse(valueFromServer);
+    var valueFromServer = await updateItemValue(itemAddress);
+
+    if (valueFromServer != null && valueFromServer != undefined) {
+        var jsonValue = valueFromServer;
         itemValue = jsonValue.v;
 
         itemDisplayName = jsonValue.d;
         itemDateTime = jsonValue.t;
-        itemSignature = jsonValue.s;
-        itemSignatureFormatted = formatSignature(itemSignature);
     } else {
         itemValue = "No data found";
         itemDisplayName = "No dispay name";
         itemDateTime = "-";
-        itemSignatureFormatted = "No signature";
     }
 
     itemAddressElement.textContent = formatItemAddress(itemAddress);
@@ -103,7 +106,6 @@ async function updateItem() {
     itemValueElement.textContent = itemValue;
     itemDisplayNameElement.textContent = itemDisplayName;
     itemDateTimeElement.textContent = itemDateTime;
-    itemSignatureElement.textContent = itemSignatureFormatted;
 
     var itemLastUpdateTimeElement = document.getElementById("itemLastUpdateTime");
     var currentTime = new Date();
