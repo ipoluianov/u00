@@ -28,15 +28,6 @@ body {
     padding: 0px;
 }
 
-#lightThemeContainer #settings {
-    background-color: #eee;
-    border-top: 1px solid #555555;
-}
-
-#darkThemeContainer #settings {
-    background-color: #333;
-}
-
 #lightThemeContainer #pageHeader {
     display: flex;
     flex-direction: row;
@@ -74,6 +65,16 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+#lightThemeContainer #serviceInfo {
+    background-color: #EEE;
+    color: #111;
+}
+
+#darkThemeContainer #serviceInfo {
+    background-color: #0F0F0F;
+    color: #EEE;
 }
 
 div.contentTextContainer {

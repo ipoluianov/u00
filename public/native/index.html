@@ -1,15 +1,14 @@
 <div style="max-width: 800px; margin: 0 auto;">
-    <div>
-
-        <div 
-            style="text-align: center;min-height: 400px; display:flex;align-items: center;justify-content: center;text-align: center;word-break: break-all;">
+    <div
+        style="text-align: center;min-height: 400px; display:flex;align-items: center;justify-content: center;text-align: center;word-break: break-all;">
         <div id="itemValue" style="word-break: break-all;white-space: pre-wrap;">
         </div>
-            
-        </div>
-        <div id="itemDateTime" style="text-align: center; color:#888888;font-size: 12pt;"></div>
-    </div>
 
+    </div>
+</div>
+
+<div id="serviceInfo">
+    <div id="itemDateTime" style="text-align: center; color:#888888;font-size: 12pt;"></div>
     <div style="color:#888888;">
         <div style="font-size: 8pt; text-align: center;">
             <pre id="itemSignature"></pre>
@@ -20,17 +19,17 @@
             <div id="itemLastUpdateTime"></div>
         </div>
     </div>
-</div>
-<div style="display:flex;align-items: center;justify-content: center;text-align: center;margin-top: 40px;">
-    <div id="qrcode" style="border: 2px solid #888888;padding: 10px;"></div>
-    <script type="text/javascript">
-        var qrcode = new QRCode("qrcode", {
-            text: window.location.href,
-            width: 256,
-            height: 256,
-            colorDark: "#000000",
-            colorLight: "#888888",
-            correctLevel: QRCode.CorrectLevel.H,
-        });            
-    </script>
+    <div style="display:flex;align-items: center;justify-content: center;text-align: center;margin-top: 40px;">
+        <div id="qrcode" style="border: 2px solid #888888;padding: 10px;"></div>
+        <script type="text/javascript">
+            var qrcode = new QRCode("qrcode", {
+                text: window.location.href,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#888888",
+                correctLevel: QRCode.CorrectLevel.H,
+            });            
+        </script>
+    </div>
 </div>
